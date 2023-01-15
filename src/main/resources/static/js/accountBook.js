@@ -266,7 +266,7 @@ function deleteOrRestore(){
         }
         ,type:'post'
         ,success:function (rp){
-            removeRows(checkList);
+           removeRows(arr);
         }
     })
 }
@@ -292,7 +292,7 @@ function permanentlyDelete(){
         }
         ,type:'post'
         ,success:function (rp){
-            removeRows(checkList);
+            removeRows(arr);
         }
     })
 }
@@ -305,9 +305,10 @@ function localString(e){
 }
 
 
-function removeRows(nodeList){
-    for(let i =0 ; i < nodeList.length ; i ++){
-        nodeList[i].remove()
+function removeRows(arr){
+    for(let i =0 ; i < arr.length ; i ++){
+        let tr = document.getElementById(arr[i]);
+        tr.remove();
     }
 }
 

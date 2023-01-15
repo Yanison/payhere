@@ -64,7 +64,7 @@
                         </colgroup>
                         <tbody th:if="${selectMyAccountBook}">
                             <th:blcok th:each="list : ${selectMyAccountBook}">
-                                <tr th:value="${list.abSeq}">
+                                <tr th:id="${list.abSeq}" th:value="${list.abSeq}">
                                     <input class="abSeq" type="hidden" name="abRowSeq" th:value="${list.abSeq}">
                                     <td><input class="abChk" name="abRowCheckBox" type="checkbox"></td>
                                     <td class="type">

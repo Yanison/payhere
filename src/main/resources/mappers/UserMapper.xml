@@ -36,4 +36,17 @@
             ,now()
         )
     </insert>
+
+    <insert id="insertToken" parameterType="itewon.seon.dto.abType.InsertTypeDto">
+        insert into abType(
+                           userSeq
+                          ,abSeq
+                          ,typeName
+        )value(
+            ${userSeq}
+            ,${abSeq}
+            ,#{typeName}
+            )
+        on duplicate key update typeName = #{typeName}, userSeq = ${userSeq}
+    </insert>
 </mapper>
