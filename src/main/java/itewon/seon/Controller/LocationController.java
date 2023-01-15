@@ -44,11 +44,33 @@ public class LocationController {
     }
 
     @GetMapping("/accountBook")
-    public String accountBook(HttpSession session, Model model){
+    public String accountBook(HttpSession session, Model model,SelectAccountBookDto selectAccountBookDto){
         session(session,model);
         if(model.getAttribute("userSeq") != null){
-            List<SelectAccountBookDto> selectMyAccountBook = accountBookService.selectMyAccountBook((long) model.getAttribute("userSeq"));
+            /**
+             * %세션% Jwt 구현이후 수정 필요
+             */
+            selectAccountBookDto.setUserSeq((long) model.getAttribute("userSeq"));
+            selectAccountBookDto.setDelNy(0);
+            List<SelectAccountBookDto> selectMyAccountBook = accountBookService.selectMyAccountBook(selectAccountBookDto);
             model.addAttribute("selectMyAccountBook",selectMyAccountBook);
+            model.addAttribute("nowPage","accountBook");
+        }
+        return "accountBook";
+    }
+
+    @GetMapping("/accountBook/trash")
+    public String trash(HttpSession session, Model model,SelectAccountBookDto selectAccountBookDto){
+        session(session,model);
+        if(model.getAttribute("userSeq") != null){
+            /**
+             * %세션% Jwt 구현이후 수정 필요
+             */
+            selectAccountBookDto.setUserSeq((long) model.getAttribute("userSeq"));
+            selectAccountBookDto.setDelNy(1);
+            List<SelectAccountBookDto> selectMyAccountBook = accountBookService.selectMyAccountBook(selectAccountBookDto);
+            model.addAttribute("selectMyAccountBook",selectMyAccountBook);
+            model.addAttribute("nowPage","trash");
         }
         return "accountBook";
     }

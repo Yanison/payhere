@@ -36,6 +36,11 @@ header{
 header img{
     height: 30px;
 }
+.title{
+    position: relative;
+    top: 85px;
+    text-align: center;
+}
 main{
     width: 100%;
     display: flex;
@@ -140,6 +145,10 @@ div.utilDiv{
 div.utilDiv button{
     width: 200px;
     height: 35px;
+    background: #1d99ff;
+    border:none;
+    border-radius: 5px;
+    color: #fff;
 }
 div.writeDiv{
     height: 50px;
@@ -172,5 +181,16 @@ div.writeDiv button,div.writeDiv input{
 
 .timestamp{
     font-size: 13px;
+}
+
+#checkAllBtn{
+    width: 35px;
+    height: 25px;
+    background: #1d99ff;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 12px;
+    cursor: pointer;
 }
 

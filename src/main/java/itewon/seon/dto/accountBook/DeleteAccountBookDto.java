@@ -8,4 +8,5 @@ import lombok.*;
 @NoArgsConstructor
 public class DeleteAccountBookDto {
     private long abSeq;
+    private int delNy;
 }

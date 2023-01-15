@@ -1,11 +1,13 @@
 package itewon.seon.Controller;
 
 import itewon.seon.dto.abType.AbTypeListDto;
+import itewon.seon.dto.abType.InsertTypeDto;
 import itewon.seon.dto.abType.SelectTypeListDto;
 import itewon.seon.dto.accountBook.UpdateAccountBookDto;
 import itewon.seon.service.AccountBookService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -39,13 +41,14 @@ public class AccountBookApiController{
         }
 
     @PostMapping("/insertType")
-    public int insertType(UpdateAccountBookDto updateAccountBookDto){
+    public int insertType(InsertTypeDto insertTypeDto){
         try{
-            System.out.println("this type is "+updateAccountBookDto.getShValue().getClass());
+            System.out.println("this type is "+insertTypeDto.getTypeName().getClass());
 
-            log.info("insertType shValue ::  {}", updateAccountBookDto.getShValue());
-            log.info("insertType useSeq ::  {}", updateAccountBookDto.getUserSeq());
-            int result = accountBookService.insertType(updateAccountBookDto);
+            log.info("insertType typeName ::  {}", insertTypeDto.getTypeName());
+            log.info("insertType useSeq ::  {}", insertTypeDto.getUserSeq());
+            log.info("insertType abSeq ::  {}", insertTypeDto.getAbSeq());
+            int result = accountBookService.insertType(insertTypeDto);
 
             return result;
         }catch (Exception e){
@@ -54,17 +57,64 @@ public class AccountBookApiController{
         }
     }
 
-        @PostMapping("/delete")
-        public int deleteAccountBook(@RequestParam long abSeq){
-            log.info("deleteAccountBook abSeq = {}",abSeq);
-            try{
-                int result = accountBookService.deleteAccountBook(abSeq);
-                return result;
-            }catch (Exception e){
-                e.getStackTrace();
-                return 0;
+    @PostMapping("/delete")
+    public HashMap<String, String> deleteAccountBook(@RequestParam(value="checkList") String data){
+        log.info("deleteAccountBook checkList = {}",data);
+        HashMap<String, String> response = new HashMap<String, String>();
+        try {
+            JSONParser parser = new JSONParser(data);
+            for(Object seq : parser.parseArray()){
+                long abSeq = Long.parseLong((String) seq) ;
+                System.out.println("deleting this :: "  + abSeq);
+                accountBookService.deleteAccountBook(abSeq);
             }
+        }catch (Exception e){
+            e.printStackTrace();
+            response.put("errorMessage",e.getMessage());
         }
+        response.put("result",data);
+        return response;
+    }
+
+    @PostMapping("/restore")
+    public HashMap<String, String> restoreAccountBook(@RequestParam(value="checkList") String data) {
+        log.info("restoreAccountBook checkList = {}",data);
+        HashMap<String, String> response = new HashMap<String, String>();
+        try {
+            JSONParser parser = new JSONParser(data);
+            for(Object seq : parser.parseArray()){
+                long abSeq = Long.parseLong((String) seq) ;
+                System.out.println("restore this :: "  + abSeq);
+                accountBookService.restoreAccountBook(abSeq);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            response.put("errorMessage",e.getMessage());
+        }
+        response.put("result",data);
+        return response;
+    }
+
+    @PostMapping("/permanentlyDelete")
+    public HashMap<String, String> permanentlyDelete(@RequestParam(value="checkList") String data) {
+        log.info("permanentlyDelete checkList = {}",data);
+        HashMap<String, String> response = new HashMap<String, String>();
+        try {
+            JSONParser parser = new JSONParser(data);
+            for(Object seq : parser.parseArray()){
+                long abSeq = Long.parseLong((String) seq) ;
+                System.out.println("restore this :: "  + abSeq);
+                accountBookService.permanentlyDeleteAccountBook(abSeq);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            response.put("errorMessage",e.getMessage());
+        }
+        response.put("result",data);
+        return response;
+    }
+
+
     @PostMapping("/deleteType")
     public int deleteType(@RequestParam long typeSeq){
         log.info("deleteType typeSeq = {}",typeSeq);

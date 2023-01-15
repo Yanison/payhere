@@ -1,6 +1,7 @@
 package itewon.seon.service;
 
 import itewon.seon.dto.abType.AbTypeListDto;
+import itewon.seon.dto.abType.InsertTypeDto;
 import itewon.seon.dto.abType.SelectTypeListDto;
 import itewon.seon.dto.accountBook.SelectAccountBookDto;
 import itewon.seon.dto.accountBook.UpdateAccountBookDto;
@@ -19,8 +20,8 @@ public class AccountBookService {
     private final AccountBookRepository accountBookRepository;
     private final AbTypeRepository abTypeRepository;
 
-    public List<SelectAccountBookDto> selectMyAccountBook(long userSeq){
-        return accountBookRepository.selectMyAccountBook(userSeq);
+    public List<SelectAccountBookDto> selectMyAccountBook(SelectAccountBookDto selectAccountBookDtoq){
+        return accountBookRepository.selectMyAccountBook(selectAccountBookDtoq);
     }
 
     public  List<AbTypeListDto> SelectTypeList(SelectTypeListDto selectTypeListDto){
@@ -36,13 +37,28 @@ public class AccountBookService {
         log.info("Service updateAccountBook getShValue = {}",updateAccountBookDto.getShValue());
         return accountBookRepository.updateAccountBook(updateAccountBookDto);
     }
-    public int insertType(UpdateAccountBookDto updateAccountBookDto){
-        log.info("Service insertType getShValue = {}",updateAccountBookDto.getShValue());
-        return abTypeRepository.insertType(updateAccountBookDto);
+    public int insertType(InsertTypeDto insertTypeDto){
+
+        log.info("Service insertType typeName ::  {}", insertTypeDto.getTypeName());
+        log.info("Service insertType useSeq ::  {}", insertTypeDto.getUserSeq());
+        log.info("Service insertType abSeq ::  {}", insertTypeDto.getAbSeq());
+
+        return abTypeRepository.insertType(insertTypeDto);
     }
+    @Transactional
     public int deleteAccountBook(long abSeq){
         log.info("Service deleteAccountBook abSeq = {}",abSeq);
         return accountBookRepository.deleteAccountBook(abSeq);
+    }
+    @Transactional
+    public int restoreAccountBook(long abSeq){
+        log.info("Service restoreAccountBook abSeq = {}",abSeq);
+        return accountBookRepository.restoreAccountBook(abSeq);
+    }
+    @Transactional
+    public int permanentlyDeleteAccountBook(Long abSeq){
+        log.info("Service permanentlyDeleteAccountBook abSeq = {}",abSeq);
+        return accountBookRepository.permanentlyDeleteAccountBook(abSeq);
     }
     public int deleteType(long typeSeq){
         return abTypeRepository.deleteType(typeSeq);

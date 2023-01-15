@@ -1,42 +1,6 @@
 let userSeq = document.getElementById('userSeq');
 let tbody = document.getElementById('tbody');
 
-let addAccountBookBtn = document.getElementById('addAccountBookBtn');
-addAccountBookBtn.addEventListener("click", addAccountBook)
-
-/**
- * 가계부 내역 추가
- */
-function addAccountBook(){
-    let htmlStr ="";
-
-    $.ajax({
-        url:'/api/accountbook/create'
-        ,data:{userSeq : userSeq.value}
-        ,type:'post'
-        ,success:function (seq){
-            console.log("create abRow :: abSqe_" + seq)
-            htmlStr +=
-                `
-                <input class="abSeq"type="hidden" value="`+seq+`">
-                <td><input class="abChk" type="checkbox"></td>
-                <td class="type">
-                    <input class="abInp" type="text" id="type" name="type" placeholder="내역" autocomplete="off">
-                    
-                </td>
-                <td class="price"><input class="abInp" type="text" id="price" name="price" placeholder="금액" ><i class="fa-solid fa-won-sign"></i></td>
-                <td class="contents"><input class="abInp" type="text" id="content" name="content" placeholder="메모" ></td>
-                <td class="timestamp">방금전</td>
-                <td name="deleteAccountBookBtn" ><button id="deleteAccountBookBtn" class="deleteAccountBookBtn" name="deleteAccountBookBtn"  value="`+seq+`"><i class="fa-solid fa-x" style="color: red"></i></button></td>
-            `
-
-            let tr = document.createElement('tr');
-            tbody.querySelector('tbody').prepend(tr);
-            let firstTr = tbody.querySelector('tbody').children[0];
-            firstTr.insertAdjacentHTML('afterbegin',htmlStr);
-        }
-    })
-}
 /**
  * 가계부 테이블에 등록된 가계부 keyup 이벤트
  * - 가계부 row 업데이트 updateAccountBook(키값,밸류값,가계부Index)
@@ -66,7 +30,7 @@ tbody.addEventListener("keyup", (e)=>{
  * - 내역타입 리스트 불러오기 selectTypeList(노드객체)
  * - 가계부 row 삭제하기 deleteAccountBook(노드객체)
  */
-tbody.addEventListener("click", (e)=>{
+tbody.addEventListener("click", async (e)=>{
     if(e.target !== e.currentTarget){
 
         let shKey = e.target.name;
@@ -79,11 +43,14 @@ tbody.addEventListener("click", (e)=>{
             console.log(thisNod)
             deleteAccountBook(thisNod)
         }else if(thisNodName === "deleteType"){
-            console.log("del_Type")
             deleteType(thisNod)
         }else if(thisNodName === "typeName"){
-            let typeIno = thisNod.parentNode.parentNode.querySelector('input[name="type"]');
-            typeIno.value = thisNod.getAttribute('value');
+            let typInp = thisNod.parentNode.parentNode.querySelector('input[name="type"]');
+            typInp.value = thisNod.getAttribute('value');
+            insertType(typInp);
+        }else if(thisNodName == "abCheckAllBtn"){
+            console.log("chkEvent")
+            checkAll();
         }
     }
     e.stopPropagation()
@@ -97,7 +64,7 @@ tbody.addEventListener("mouseover", (e)=>{
     if(e.target !== e.currentTarget){
         let thisNod = e.target;
         let thisNodName = thisNod.getAttribute('name');
-        console.log("nod_attr_Name"+thisNodName + " // nod_value " + thisNod.value)
+        // console.log("nod_attr_Name :: "+thisNodName + " // nod_value ::" + thisNod.value)
     }
     e.stopPropagation()
 })
@@ -106,7 +73,7 @@ tbody.addEventListener("mouseover", (e)=>{
  * 가계부 테이블에 등록된 가계부 focusout 이벤트
  * -내역 input에서 focusout되면 불러온 내역타입 container nod 지우기
  */
-tbody.addEventListener("focusout", (e)=>{
+tbody.addEventListener("focusout", async (e)=>{
     if(e.target !== e.currentTarget){
         let shKey = e.target.name;
         let shValue = e.target.value;
@@ -115,11 +82,12 @@ tbody.addEventListener("focusout", (e)=>{
         if(shKey == "type"){
             insertType(thisNod)
 
-            let divs = thisNod.parentNode.querySelectorAll('div')
+            let divs =await thisNod.parentNode.querySelectorAll('div')
+
             for(let i = 0 ; i < divs.length;i++){
                 setTimeout(()=>{
                     divs[i].remove()
-                },"100")
+                },"300")
             }
         }
     }
@@ -163,25 +131,24 @@ function updateAccountBook(node){
 function insertType(node){
     console.log("focusOut insertType")
     let shKey = node.name
-    let shValue = node.value
+    let typeName = node.value
     let apiUrl ='/api/accountbook/update';
     let userSeq = document.getElementById('userSeq').value;
     let abSeq = node.parentNode.parentNode.querySelector('button').value;
 
-    if(shKey =="type"){
-        apiUrl = '/api/accountbook/insertType'
-    }
     console.log(
         "userSeq :: "+userSeq+
         "abSeq :: "+abSeq+
         "shKey :: "+shKey+
-        ", shValue ::"+shValue+
+        ", typeName ::"+typeName+
         ", userSeq :: " + userSeq);
+
+    if(typeName == ''){return false}
 
     $.ajax({
         url: '/api/accountbook/insertType'
         ,data:{
-            shValue : shValue
+            typeName : typeName
             ,userSeq : userSeq
             ,abSeq : abSeq
         }
@@ -192,24 +159,7 @@ function insertType(node){
     })
 }
 
-/**
- * 가계부 row 삭제
- */
-function deleteAccountBook(nod){
-    let abSeq = nod.value;
-    $.ajax({
-        url:'/api/accountbook/delete'
-        ,data:{ abSeq : abSeq}
-        ,type:'post'
-        ,success:function (rp){
-            console.log(rp);
-            if(rp == 1){
-                let parentTr = nod.parentNode.parentNode
-                parentTr.remove();
-            }
-        }
-    })
-}
+
 
 /**
  * 가계부 내역타입 불러오기
@@ -238,8 +188,8 @@ function selectTypeList(nod){
             console.log(typeList)
             for(let i = 0; i < n; i ++){
                 let span =  `<span class="typeName" name="typeName" value="`+typeList[i].typeName+`">`+typeList[i].typeName+`<button name="deleteType" class="deleteType" value="`+typeList[i].typeSeq+`">X</button></span>`;
-                console.log(span)
-                nod.parentNode.querySelector('div').innerHTML=span;
+
+                nod.parentNode.querySelector('div').innerHTML+=span;
             }
         }
     })
@@ -258,12 +208,94 @@ function deleteType(nod){
         }
     })
 }
-function checkAll(nodList){
-}
-function deleteAccountBookChekedAll(nod){
-    console.log('del all')
+
+
+/**
+ * 가계부 row 삭제 or 복구
+ */
+let endPoint = document.getElementById('thead').querySelector('tr td:last-child').getAttribute('name');
+let delNyValue = document.getElementById('thead').querySelector('tr td:last-child').getAttribute('value');;
+function deleteAccountBook(nod){
+    let arr = []
+    let abSeq = nod.value;
+    arr.push(abSeq);
+    console.log("endPoint :: "+ endPoint);
+    $.ajax({
+        url:'/api/accountbook/'+endPoint
+        ,data:{
+            checkList : JSON.stringify(arr)
+        }
+        ,type:'post'
+        ,success:function (rp){
+            console.log(rp);
+            if(rp == 1){
+                let parentTr = nod.parentNode.parentNode
+                parentTr.remove();
+            }
+        }
+    })
 }
 
+const checkAll = (target) => {
+    const isChecked = target.checked;
+    document.querySelectorAll('input[name="abRowCheckBox"]')
+        .forEach(el => {
+            el.checked = isChecked;
+        });
+}
+
+let delOrRestoreBtn= document.querySelector('button.delOrRestoreBtn');
+delOrRestoreBtn.addEventListener("click", deleteOrRestore);
+
+function deleteOrRestore(){
+    let arr =[];
+    let howManyAreThey = 0;
+    let checkList = document.querySelectorAll('input[name="abRowCheckBox"]')
+    for(let i =0 ; i < checkList.length ; i ++){
+        if(checkList[i].checked == true){
+            let abRowSeq = checkList[i].parentNode.parentNode.querySelector('input[name="abRowSeq"]');
+            arr.push(abRowSeq.value);
+            howManyAreThey ++;
+        }
+    }
+    console.log(arr);
+    $.ajax({
+        url:'/api/accountbook/'+endPoint
+        ,data:{
+            checkList : JSON.stringify(arr)
+        }
+        ,type:'post'
+        ,success:function (rp){
+            removeRows(checkList);
+        }
+    })
+}
+
+let permanentlyDeleteBtn = document.getElementById('permanentlyDeleteBtn')
+permanentlyDeleteBtn.addEventListener('click',permanentlyDelete)
+function permanentlyDelete(){
+    let arr =[];
+    let howManyAreThey = 0;
+    let checkList = document.querySelectorAll('input[name="abRowCheckBox"]')
+    for(let i =0 ; i < checkList.length ; i ++){
+        if(checkList[i].checked == true){
+            let abRowSeq = checkList[i].parentNode.parentNode.querySelector('input[name="abRowSeq"]');
+            arr.push(abRowSeq.value);
+            howManyAreThey ++;
+        }
+    }
+    console.log(arr);
+    $.ajax({
+        url:'/api/accountbook/permanentlyDelete'
+        ,data:{
+            checkList : JSON.stringify(arr)
+        }
+        ,type:'post'
+        ,success:function (rp){
+            removeRows(checkList);
+        }
+    })
+}
 function localString(e){
     let value = e.replace(/[^0-9]/g, "");
 
@@ -271,4 +303,12 @@ function localString(e){
     console.log("fillted :: "+fillted);
     return fillted;
 }
+
+
+function removeRows(nodeList){
+    for(let i =0 ; i < nodeList.length ; i ++){
+        nodeList[i].remove()
+    }
+}
+
 

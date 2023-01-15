@@ -12,9 +12,16 @@
             <th:block th:replace="fragment/header.html :: headerFragment">
             </th:block>
         </header>
+        <th:block th:if="${nowPage} == 'accountBook'">
+            <h1 class="title"> 가계부 </h1>
+        </th:block>
+        <th:block th:unless="${nowPage} == 'accountBook'">
+            <h1 class="title"> 휴지통 </h1>
+        </th:block>
+
         <main>
             <article>
-               <table class="theader">
+               <table id="thead" class="theader">
                    <colgroup>
                        <col style="width: 5%"/>
                        <col style="width: 20%"/>
@@ -25,12 +32,23 @@
                    </colgroup>
                    <thead>
                        <tr>
-                           <td><input id="abCheckAllBtn" name="abCheckAllBtn" type="checkbox"></td>
+                           <td>
+                               <input id="checkAllBtn" name="checkAll" type="checkbox" onchange="checkAll(this)">
+                           </td>
                            <td class="type">내역</td>
                            <td class="price">금액</td>
                            <td class="contents">메모</td>
                            <td>날짜</td>
-                           <td>삭제</td>
+                               <th:block th:if="${nowPage} == 'accountBook'">
+                                   <td name="delete" value="1">
+                                    삭제
+                                   </td>
+                               </th:block>
+                               <th:block th:unless="${nowPage} == 'accountBook'">
+                                   <td name="restore" value="0">
+                                       복구
+                                   </td>
+                               </th:block>
                        </tr>
                    </thead>
                </table >
@@ -47,11 +65,10 @@
                         <tbody th:if="${selectMyAccountBook}">
                             <th:blcok th:each="list : ${selectMyAccountBook}">
                                 <tr th:value="${list.abSeq}">
-                                    <input class="abSeq"type="hidden" th:value="${list.abSeq}">
-                                    <td><input class="abChk" type="checkbox"></td>
+                                    <input class="abSeq" type="hidden" name="abRowSeq" th:value="${list.abSeq}">
+                                    <td><input class="abChk" name="abRowCheckBox" type="checkbox"></td>
                                     <td class="type">
                                         <input th:value="${list.type}" class="abInp" type="text" id="type" name="type"  placeholder="내역" autocomplete="off">
-
                                     </td>
                                     <td class="price"><input th:value="${list.price}" class="abInp" type="text" id="price" name="price" placeholder="금액"><i class="fa-solid fa-won-sign"></i></td>
                                     <td class="contents"><input th:value="${list.contents}" class="abInp" type="text" id="contents" name="contents" placeholder="메모"></td>
@@ -68,8 +85,16 @@
                     </table>
                 </div>
                 <div class="utilDiv">
-                    <button id="addAccountBookBtn">가계부추가</button>
-                    <button id="deleteAccountBookChekedAllBtn">선택삭제</button>
+                    <th:block th:if="${nowPage} == 'accountBook'">
+                        <button id="addAccountBookBtn">가계부추가</button>
+                        <button class="delOrRestoreBtn">선택삭제</button>
+                        <button onclick="location.href='/payhere/accountBook/trash'" >휴지통</button>
+                    </th:block>
+                    <th:block th:unless="${nowPage} == 'accountBook'">
+                        <button class="delOrRestoreBtn">선택복구</button>
+                        <button id="permanentlyDeleteBtn">영구삭제(체크선택)</button>
+                        <button onclick="location.href='/payhere/accountBook'">가계부</button>
+                    </th:block>
                 </div>
             </article>
         </main>
@@ -83,3 +108,11 @@
 
 <link rel="stylesheet" href="/css/accountBook.css">
 <script src="/js/accountBook.js"></script>
+<script src="/js/addAccountBook.js"></script>
+
+
+
+
+
+
+

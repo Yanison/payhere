@@ -25,18 +25,18 @@
         ]]>
     </select>
 
-    <update id="insertType">
+    <insert id="insertType" parameterType="itewon.seon.dto.abType.InsertTypeDto">
         insert into abType(
                userSeq
                ,abSeq
               ,typeName
         )value(
-            ${useSeq}
+            ${userSeq}
             ,${abSeq}
-            ,#{shValue}
+            ,#{typeName}
         )
-        on duplicate key update typeName = #{shValue}, userSeq = ${useSeq}, abSeq = ${abSeq}
-    </update>
+        on duplicate key update typeName = #{typeName}, userSeq = ${userSeq}
+    </insert>
 
     <delete id="deleteType" parameterType="Long">
         delete from abType where typeSeq = ${typeSeq};
