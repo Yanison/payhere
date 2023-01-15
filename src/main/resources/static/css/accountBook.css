@@ -115,7 +115,15 @@ table.tbody tr td div span{
     cursor: pointer;
     border-bottom: 1px solid #dedede;
 }
-table.tbody tr td div span:hover{
+table.tbody tr td div button{
+    border: 1px solid #dedede;
+    background: none;
+    cursor: pointer;
+    float:right;
+    color: darkred;
+    font-size: 10px;
+}
+table.tbody tr td div button:hover{
     background: #e0e0e0;
 }
 table.tbody tr td div span:last-child{
@@ -153,6 +161,7 @@ div.writeDiv button,div.writeDiv input{
     margin: 0;
     width: 25px;
     height: 30px;
+    color: darkred;
 }
 .deleteAccountBookBtn:hover{
     background: #e0e0e0;

@@ -25,7 +25,7 @@
                    </colgroup>
                    <thead>
                        <tr>
-                           <td><input id="abChkAll" type="checkbox"></td>
+                           <td><input id="abCheckAllBtn" name="abCheckAllBtn" type="checkbox"></td>
                            <td class="type">내역</td>
                            <td class="price">금액</td>
                            <td class="contents">메모</td>
@@ -56,7 +56,7 @@
                                     <td class="price"><input th:value="${list.price}" class="abInp" type="text" id="price" name="price" placeholder="금액"><i class="fa-solid fa-won-sign"></i></td>
                                     <td class="contents"><input th:value="${list.contents}" class="abInp" type="text" id="contents" name="contents" placeholder="메모"></td>
                                     <td class="timestamp" th:text="${#dates.format(list.regTimestamp, 'yyyy/MM/dd HH:mm')}"></td>
-                                    <td name="deleteAccountBookBtn" ><button id="deleteAccountBookBtn" class="deleteAccountBookBtn" name="deleteAccountBookBtn" th:value="${list.abSeq}" ><i class="fa-solid fa-x" name="deleteAccountBookBtn" style="color: red"></i></button></td>
+                                    <td name="deleteAccountBookBtn" ><button id="deleteAccountBookBtn" class="deleteAccountBookBtn" name="deleteAccountBookBtn" th:value="${list.abSeq}" >X</i></button></td>
                                 </tr>
                             </th:blcok>
                         </tbody>

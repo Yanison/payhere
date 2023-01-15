@@ -1,6 +1,7 @@
 package itewon.seon.Controller;
 
 import itewon.seon.dto.abType.AbTypeListDto;
+import itewon.seon.dto.abType.InsertTypeDto;
 import itewon.seon.dto.abType.SelectTypeListDto;
 import itewon.seon.dto.accountBook.UpdateAccountBookDto;
 import itewon.seon.service.AccountBookService;
@@ -27,29 +28,73 @@ public class AccountBookApiController{
         }
 
         @PostMapping("/update")
-        public void updateAccountBook(UpdateAccountBookDto updateAccountBookDto){
+        public int updateAccountBook(UpdateAccountBookDto updateAccountBookDto){
             try{
-                accountBookService.updateAccountBook(updateAccountBookDto);
+                System.out.println("this type is "+updateAccountBookDto.getShKey().getClass());
+                if(updateAccountBookDto.getShKey() != "type"){
+                    log.info("updateAccountBook key != type :: {}",updateAccountBookDto.getShKey());
+                    int result = accountBookService.updateAccountBook(updateAccountBookDto);
+                    return result;
+
+
+                }
+
+                log.info("updateAccountBook key = type ::  {}",updateAccountBookDto.getShKey());
+                int result = accountBookService.insertType(new InsertTypeDto(
+                        updateAccountBookDto.getUserSeq(),
+                        updateAccountBookDto.getShValue()
+                ));
+                return result;
             }catch (Exception e){
-                System.out.println(e);
+                e.getStackTrace();
+                return 0;
             }
         }
+
+    @PostMapping("/insertType")
+    public int insertType(InsertTypeDto insertTypeDto){
+        try{
+            System.out.println("this type is "+insertTypeDto.getShValue().getClass());
+
+            log.info("insertType shValue ::  {}", insertTypeDto.getShValue());
+            log.info("insertType shValue ::  {}", insertTypeDto.getShValue());
+            int result = accountBookService.insertType(insertTypeDto);
+
+            return result;
+        }catch (Exception e){
+            e.getStackTrace();
+            return 0;
+        }
+    }
 
         @PostMapping("/delete")
-        public void deleteAccountBook(@RequestParam long abSeq){
+        public int deleteAccountBook(@RequestParam long abSeq){
             log.info("deleteAccountBook abSeq = {}",abSeq);
             try{
-                accountBookService.deleteAccountBook(abSeq);
+                int result = accountBookService.deleteAccountBook(abSeq);
+                return result;
             }catch (Exception e){
-                System.out.println(e);
+                e.getStackTrace();
+                return 0;
             }
         }
-
-        @GetMapping("/selectTypeList")
-        public HashMap<String,Object> selectTypeList(SelectTypeListDto selectTypeListDto){
-            HashMap<String,Object> response = new HashMap<String,Object>();
-            List<AbTypeListDto> selectTypeList = accountBookService.SelectTypeList(selectTypeListDto);
-            response.put("list",selectTypeList);
-            return response;
+    @PostMapping("/deleteType")
+    public int deleteType(@RequestParam long typeSeq){
+        log.info("deleteType typeSeq = {}",typeSeq);
+        try{
+            int result = accountBookService.deleteType(typeSeq);
+            return result;
+        }catch (Exception e){
+            e.getStackTrace();
+            return 0;
         }
+    }
+
+    @GetMapping("/selectTypeList")
+    public HashMap<String,Object> selectTypeList(SelectTypeListDto selectTypeListDto){
+        HashMap<String,Object> response = new HashMap<String,Object>();
+        List<AbTypeListDto> selectTypeList = accountBookService.SelectTypeList(selectTypeListDto);
+        response.put("list",selectTypeList);
+        return response;
+    }
 }

@@ -11,7 +11,7 @@
             ,typeName
         from abType
         ]]>
-        where userSeq = #{userSeq}
+        where userSeq = ${userSeq}
         <if test='#{shValue} != ""'>
          and  typeName LIKE CONCAT('%',#{shValue},'%')
         </if>
@@ -24,7 +24,19 @@
                 ), typeName;
         ]]>
     </select>
-    <delete id="deleteType">
-        delete from abType where typeSeq = {typeSeq};
+
+    <update id="insertType">
+        insert into abType(
+               userSeq
+              ,typeName
+        )value(
+            ${userSeq}
+            ,#{shValue}
+        )
+        on duplicate key update typeName = #{shValue}, userSeq = ${userSeq}
+    </update>
+
+    <delete id="deleteType" parameterType="Long">
+        delete from abType where typeSeq = ${typeSeq};
     </delete>
 </mapper>

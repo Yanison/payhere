@@ -9,11 +9,10 @@ spring:
 
   datasource:
     hikari:
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      jdbc-url: jdbc:mysql://yongsan.caas47fzd5zb.ap-northeast-2.rds.amazonaws.com:33066/payhere?useSSL=false&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+      driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+      jdbc-url: jdbc:log4jdbc:mysql://yongsan.caas47fzd5zb.ap-northeast-2.rds.amazonaws.com:33066/payhere?useSSL=false&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
       username: hwangDmin
       password: 992837yns13616!
-      connection-test-query: SELECT NOW() FROM dual;
 
   jpa:
     database: mysql
@@ -52,3 +51,25 @@ mail:
         starttls:
           enable: true
 
+#logging:
+#  level:
+#    com:
+#      zaxxer:
+#        hikari: INFO
+#    javax:
+#      sql:
+#        DataSource: OFF
+#    jdbc:
+#      audit: OFF
+#      resultset: OFF
+#      resultsettable: INFO  #SQL 결과 데이터 Table을 로그로 남긴다.
+#      sqlonly: OFF     #SQL만 로그로 남긴다.
+#      sqltiming: INFO    #SQL과 소요시간을 표기한다.
+#      connection : OFF  # 커넥션 확인가능
+#    org:
+#      hibernate:
+#        SQL: DEBUG
+#        type:
+#          descriptor:
+#            sql:
+#              BasicBinder: TRACE

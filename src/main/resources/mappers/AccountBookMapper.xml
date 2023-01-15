@@ -38,32 +38,11 @@
     </insert>
 
     <update id="updateAccountBook">
-        <choose>
-            <when test='#{shKey} == "type"'>
-                insert into abType(
-                abSeq
-                ,typeName
-                )value(
-                #{abSeq}
-                ,#{shValue}
-                )
-                on duplicate key update typeName = #{shValue}, abSeq = #{abSeq}
-            </when>
-            <when test='#{shKey} == "price"'>
-                update AccountBook set
-                ${shKey}
+        update AccountBook set
+            ${shKey}
                 =
                 #{shValue}
-                where abSeq = #{abSeq}
-            </when>
-            <otherwise>
-                update AccountBook set
-                ${shKey}
-                =
-                #{shValue}
-                where abSeq = #{abSeq}
-            </otherwise>
-        </choose>
+        where abSeq = #{abSeq}
     </update>
     <update id="deleteAccountBook" parameterType="Long">
         update AccountBook set

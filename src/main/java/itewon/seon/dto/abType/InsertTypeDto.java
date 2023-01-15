@@ -1,4 +1,4 @@
-package itewon.seon.dto.accountBook;
+package itewon.seon.dto.abType;
 
 import lombok.*;
 
@@ -7,9 +7,7 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UpdateAccountBookDto{
-    private long abSeq;
+public class InsertTypeDto {
     private long userSeq;
-    private String shKey;
     private String shValue;
 }

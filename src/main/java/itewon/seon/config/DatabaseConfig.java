@@ -13,7 +13,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
 import javax.sql.DataSource;
-import java.beans.ConstructorProperties;
 
 @Configuration
 @PropertySource("classpath:/application.yml")
@@ -40,6 +39,8 @@ public class DatabaseConfig {
         factoryBean.setConfiguration(mybatisConfig());
         return factoryBean.getObject();
     }
+
+
 
     @Bean
     public SqlSessionTemplate sqlSession() throws Exception {
