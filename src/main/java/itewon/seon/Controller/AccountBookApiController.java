@@ -1,7 +1,6 @@
 package itewon.seon.Controller;
 
 import itewon.seon.dto.abType.AbTypeListDto;
-import itewon.seon.dto.abType.InsertTypeDto;
 import itewon.seon.dto.abType.SelectTypeListDto;
 import itewon.seon.dto.accountBook.UpdateAccountBookDto;
 import itewon.seon.service.AccountBookService;
@@ -31,20 +30,8 @@ public class AccountBookApiController{
         public int updateAccountBook(UpdateAccountBookDto updateAccountBookDto){
             try{
                 System.out.println("this type is "+updateAccountBookDto.getShKey().getClass());
-                if(updateAccountBookDto.getShKey() != "type"){
-                    log.info("updateAccountBook key != type :: {}",updateAccountBookDto.getShKey());
-                    int result = accountBookService.updateAccountBook(updateAccountBookDto);
-                    return result;
-
-
-                }
-
-                log.info("updateAccountBook key = type ::  {}",updateAccountBookDto.getShKey());
-                int result = accountBookService.insertType(new InsertTypeDto(
-                        updateAccountBookDto.getUserSeq(),
-                        updateAccountBookDto.getShValue()
-                ));
-                return result;
+                log.info("updateAccountBook key != type :: {}",updateAccountBookDto.getShKey());
+                return accountBookService.updateAccountBook(updateAccountBookDto);
             }catch (Exception e){
                 e.getStackTrace();
                 return 0;
@@ -52,13 +39,13 @@ public class AccountBookApiController{
         }
 
     @PostMapping("/insertType")
-    public int insertType(InsertTypeDto insertTypeDto){
+    public int insertType(UpdateAccountBookDto updateAccountBookDto){
         try{
-            System.out.println("this type is "+insertTypeDto.getShValue().getClass());
+            System.out.println("this type is "+updateAccountBookDto.getShValue().getClass());
 
-            log.info("insertType shValue ::  {}", insertTypeDto.getShValue());
-            log.info("insertType shValue ::  {}", insertTypeDto.getShValue());
-            int result = accountBookService.insertType(insertTypeDto);
+            log.info("insertType shValue ::  {}", updateAccountBookDto.getShValue());
+            log.info("insertType useSeq ::  {}", updateAccountBookDto.getUserSeq());
+            int result = accountBookService.insertType(updateAccountBookDto);
 
             return result;
         }catch (Exception e){

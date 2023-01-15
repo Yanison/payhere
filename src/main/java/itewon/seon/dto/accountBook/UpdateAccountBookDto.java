@@ -8,8 +8,8 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UpdateAccountBookDto{
-    private long abSeq;
-    private long userSeq;
     private String shKey;
     private String shValue;
+    private long abSeq;
+    private long userSeq;
 }

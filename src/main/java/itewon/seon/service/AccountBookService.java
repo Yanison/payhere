@@ -1,7 +1,6 @@
 package itewon.seon.service;
 
 import itewon.seon.dto.abType.AbTypeListDto;
-import itewon.seon.dto.abType.InsertTypeDto;
 import itewon.seon.dto.abType.SelectTypeListDto;
 import itewon.seon.dto.accountBook.SelectAccountBookDto;
 import itewon.seon.dto.accountBook.UpdateAccountBookDto;
@@ -37,9 +36,9 @@ public class AccountBookService {
         log.info("Service updateAccountBook getShValue = {}",updateAccountBookDto.getShValue());
         return accountBookRepository.updateAccountBook(updateAccountBookDto);
     }
-    public int insertType(InsertTypeDto insertTypeDto){
-        log.info("Service insertType getShValue = {}",insertTypeDto.getShValue());
-        return abTypeRepository.insertType(insertTypeDto);
+    public int insertType(UpdateAccountBookDto updateAccountBookDto){
+        log.info("Service insertType getShValue = {}",updateAccountBookDto.getShValue());
+        return abTypeRepository.insertType(updateAccountBookDto);
     }
     public int deleteAccountBook(long abSeq){
         log.info("Service deleteAccountBook abSeq = {}",abSeq);

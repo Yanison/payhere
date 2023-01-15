@@ -6,17 +6,17 @@
     <select id="selectMyAccountBook" resultMap="SelectAccountBook" parameterType="Long">
         <![CDATA[
         select
-            abSeq
-            ,ifNull(price,'') as price
-            ,ifNull(contents,'') as contents
-            ,ifNull(type,'') as type
-            ,regTimestamp
-            ,delNy
-            ,userSeq
-        from AccountBook
-            where userSeq = #{userSeq}
-            and delNy = 0
-        order by regTimestamp desc
+            ab.abSeq
+             ,ifNull(price,'') as price
+             ,ifNull(contents,'') as contents
+             ,ifNull((select typeName from abType type where type.abSeq = ab.abSeq),'') as type
+             ,regTimestamp
+             ,delNy
+             ,ab.userSeq
+        from AccountBook ab left join abType ty on ab.userSeq = ty.userSeq
+        where ab.userSeq = ${userSeq}
+          and delNy = 0
+        order by regTimestamp desc;
         ]]>
     </select>
 
@@ -42,7 +42,7 @@
             ${shKey}
                 =
                 #{shValue}
-        where abSeq = #{abSeq}
+        where abSeq = ${abSeq}
     </update>
     <update id="deleteAccountBook" parameterType="Long">
         update AccountBook set

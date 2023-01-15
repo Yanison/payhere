@@ -1,4 +1,4 @@
-let userSeq = document.getElementById('userSeq')
+let userSeq = document.getElementById('userSeq');
 let tbody = document.getElementById('tbody');
 
 let addAccountBookBtn = document.getElementById('addAccountBookBtn');
@@ -113,7 +113,7 @@ tbody.addEventListener("focusout", (e)=>{
         let abSeq = e.target.parentNode.parentNode.querySelector('button').value;
         let thisNod = e.target;
         if(shKey == "type"){
-            updateAccountBook(thisNod)
+            insertType(thisNod)
 
             let divs = thisNod.parentNode.querySelectorAll('div')
             for(let i = 0 ; i < divs.length;i++){
@@ -130,34 +130,60 @@ tbody.addEventListener("focusout", (e)=>{
  * 가계부 row 수정
  */
 function updateAccountBook(node){
-    let seq;
     let shKey = node.name
     let shValue = node.value
     let apiUrl ='/api/accountbook/update';
-
-    seq = node.parentNode.parentNode.querySelector('button').value;
+    let userSeq = document.getElementById('userSeq').value;
+    let abSeq = node.parentNode.parentNode.querySelector('button').value;
 
     if(shKey =="type"){
-        seq = userSeq.value;
         apiUrl = '/api/accountbook/insertType'
     }
-
-
-    console.log(seq);
-
-    console.log("shKey :: "+shKey+", shValue ::"+shValue+", seq :: " + seq);
-
-    if(shKey == "price"){
-        console.log(shKey)
-        localString(shValue)
-    }
+    console.log(
+        "userSeq :: "+userSeq+
+        "abSeq :: "+abSeq+
+        "shKey :: "+shKey+
+        ", shValue ::"+shValue+
+        ", userSeq :: " + userSeq);
 
     $.ajax({
-        url: apiUrl
+        url: '/api/accountbook/update'
         ,data:{
             shKey : shKey
             ,shValue : shValue
-            ,abSeq : seq
+            ,abSeq : abSeq
+        }
+        ,type:'post'
+        ,success:function (rp){
+            console.log(rp);
+        }
+    })
+}
+
+function insertType(node){
+    console.log("focusOut insertType")
+    let shKey = node.name
+    let shValue = node.value
+    let apiUrl ='/api/accountbook/update';
+    let userSeq = document.getElementById('userSeq').value;
+    let abSeq = node.parentNode.parentNode.querySelector('button').value;
+
+    if(shKey =="type"){
+        apiUrl = '/api/accountbook/insertType'
+    }
+    console.log(
+        "userSeq :: "+userSeq+
+        "abSeq :: "+abSeq+
+        "shKey :: "+shKey+
+        ", shValue ::"+shValue+
+        ", userSeq :: " + userSeq);
+
+    $.ajax({
+        url: '/api/accountbook/insertType'
+        ,data:{
+            shValue : shValue
+            ,userSeq : userSeq
+            ,abSeq : abSeq
         }
         ,type:'post'
         ,success:function (rp){

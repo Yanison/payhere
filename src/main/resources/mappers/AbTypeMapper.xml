@@ -28,12 +28,14 @@
     <update id="insertType">
         insert into abType(
                userSeq
+               ,abSeq
               ,typeName
         )value(
-            ${userSeq}
+            ${useSeq}
+            ,${abSeq}
             ,#{shValue}
         )
-        on duplicate key update typeName = #{shValue}, userSeq = ${userSeq}
+        on duplicate key update typeName = #{shValue}, userSeq = ${useSeq}, abSeq = ${abSeq}
     </update>
 
     <delete id="deleteType" parameterType="Long">
