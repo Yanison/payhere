@@ -1,0 +1,8 @@
+ul,li,label,p{
+    margin: 0px;
+    padding: 0px;
+}
+a{
+    text-decoration: none;
+    color: #333;
+}

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="itewon.seon.repository.AbTypeRepository" >
+    <resultMap id="abType" type="itewon.seon.dto.abType.AbTypeListDto"></resultMap>
+    <resultMap id="selectTypeListByShValue" type="itewon.seon.dto.abType.SelectTypeListDto"></resultMap>
+
+    <select id="selectTypeList" resultMap="abType">
+        <![CDATA[
+        select
+            typeSeq
+            ,typeName
+        from abType
+        ]]>
+        where userSeq = #{userSeq}
+        <if test='#{shValue} != ""'>
+         and  typeName LIKE CONCAT('%',#{shValue},'%')
+        </if>
+        <![CDATA[
+        order by
+            (
+                CASE WHEN ASCII(SUBSTRING(typeName,1)) BETWEEN 48 AND 57 THEN 3
+                     WHEN ASCII(SUBSTRING(typeName,1)) < 123 THEN 2 ELSE 1
+                    END
+                ), typeName;
+        ]]>
+    </select>
+    <delete id="deleteType">
+        delete from abType where typeSeq = {typeSeq};
+    </delete>
+</mapper>

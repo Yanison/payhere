@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="itewon.seon.repository.UserRepository" >
+
+    <resultMap id="user" type="itewon.seon.dto.user.UserDto"></resultMap>
+    <resultMap id="login" type="itewon.seon.dto.user.LoginDto"></resultMap>
+
+    <select id="findUserByIdAndPw" resultMap="login">
+        select
+            userSeq
+            ,userName
+            ,count(*) cnt
+        from User
+        where userEmail = #{userEmail}
+        and userPw = #{userPw}
+    </select>
+
+    <select id="findUserByEmail" resultType="Integer" parameterType="String">
+        select
+             count(*) cnt
+        from User
+        where userEmail = #{userEmail}
+    </select>
+
+    <insert id="createAccount">
+        insert into User(
+            userEmail
+            ,userName
+            ,userPw
+            ,regTimestamp
+        )values(
+            #{userEmail}
+            ,#{userName}
+            ,#{userPw}
+            ,now()
+        )
+    </insert>
+</mapper>

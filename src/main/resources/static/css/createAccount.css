@@ -1,0 +1,83 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+.wrapper{
+    width: 100%;
+    height: 100%;
+}
+header{
+    height: 60px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 50px;
+    border-bottom: 1px solid #dedede;
+}
+header img{
+    height: 30px;
+}
+main{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+article{
+    width: 700px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border:1px solid #dedede;
+    border-radius: 10px;
+}
+form{
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+}
+article input,button,select{
+    width: 100%;
+    height: 50px;
+    border: 1px solid #dedede;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+.emailDiv,.emailValiDiv{
+    display: flex;
+    justify-content: space-between;
+}
+.emailDiv input,button,select{
+    width: 30%;
+}
+
+.emailValiDiv input{
+    width: 80%;
+}
+.emailValiDiv div{
+    width: 15%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #dedede;
+    border-radius: 5px;
+}
+button{
+    cursor: pointer;
+}
+form > div:last-child{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    width: 500px;
+}
+a{
+    text-decoration: none;
+}
+.creatAccount:hover{
+    color:deepskyblue;
+}

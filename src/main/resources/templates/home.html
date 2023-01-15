@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Home</title>
+    <link rel="stylesheet" href="/css/home.css">
+    <th:block th:replace="fragment/commonResources.html :: commonFragment">
+    </th:block>
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <th:block th:replace="fragment/header.html :: headerFragment">
+            </th:block>
+        </header>
+        <main>
+            <article>
+                <img class="background" src="/img/img_hero_4.png">
+                <h1>가계부의 새로운 미래, 페이히어</h1>
+                <div th:if="${userSeq}">
+                    <a href="/payhere/accountBook">나의 가계부</a>
+                    <a id="logOutBtn">로그아웃 하기</a>
+                </div>
+                <div th:unless="${userSeq}">
+                    <a href="/payhere/accountBook">나의 가계부</a>
+                    <a href="/payhere/login">로그인</a>
+                    <a href="/payhere/createAccount">회원가입</a>
+                </div>
+            </article>
+        </main>
+        <footer>
+            <th:block th:replace="fragment/footer.html :: footerFragment">
+            </th:block>
+        </footer>
+    </div>
+</body>
+</html>
+
+<script src="/js/home.js"></script>

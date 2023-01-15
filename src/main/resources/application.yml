@@ -1,0 +1,54 @@
+spring:
+  thymeleaf:
+    cache: false
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      enabled: true
+
+  datasource:
+    hikari:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      jdbc-url: jdbc:mysql://yongsan.caas47fzd5zb.ap-northeast-2.rds.amazonaws.com:33066/payhere?useSSL=false&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+      username: hwangDmin
+      password: 992837yns13616!
+      connection-test-query: SELECT NOW() FROM dual;
+
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        format_sql: true
+
+  jwt:
+    algorithm: "HS256"
+    header: Authorization
+    secret: c2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQtc2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQK
+    token-validity-in-seconds: 86400
+
+  mybatis:
+    configuration:
+      multiple-result-sets-enabled: false
+      map-underscore-to-camel-case: true
+      call-setters-on-nulls: true
+      jdbc-type-for-null: varchar
+      default-fetch-size: 500
+    mapper-locations:
+      - classpath:mybatis/mapper/*.xml
+mail:
+  host: smtp.gmail.com
+  port: 587
+  username: {ghkdtjsdi@gmail.com}
+  password: {dtsjzmcdbqefpkgq}
+  properties:
+    mail:
+      smtp:
+        auth: true
+        starttls:
+          enable: true
+

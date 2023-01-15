@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Home</title>
+    <th:block th:replace="fragment/commonResources.html :: commonFragment">
+    </th:block>
+    <link rel="stylesheet" href="/css/createAccount.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+            <th:block th:replace="fragment/header.html :: headerFragment">
+            </th:block>
+        </header>
+        <main>
+            <article>
+                <h1>회원가입</h1>
+                <form id="ccreatAccountForm" action="/api/member/createAccount" method="post">
+                    <div class="emailDiv">
+                        <input type="text" id="userEmailId"placeholder="Email">
+                        <select id="emailAddress">
+                            <option>address</option>
+                            <option value="naver.com">@naver.com</option>
+                            <option value="gmail.com">@gmail.com</option>
+                            <option value="daum.com">@daum.com</option>
+                        </select>
+                        <button type="button" id="reqeustEmailValidationBtn">인증하기</button>
+                        <input type="hidden" id="userEmail" name="userEmail" placeholder="Email">
+                    </div>
+                    <div class="emailValiDiv">
+                        <input type="text" id="emailValidationCode" placeholder="인증번호">
+                        <div><i id="checkIcon" class="fa-solid fa-check"></i></div>
+                        <input type="hidden" id="emailValidationCodeHidden" >
+                    </div>
+                    <input type="text" id="userPw" name="userPw" placeholder="Password">
+                    <input type="text" id="userName" name="userName" placeholder="Name">
+                    <div>
+                        <a href="/payhere/" class="creatAccount">돌아가기</a>
+                        <button type="button" id="creatAccountBtn" class="creatAccount">회원가입</button>
+                    </div>
+                </form>
+
+            </article>
+        </main>
+        <footer>
+            <th:block th:replace="fragment/footer.html :: footerFragment">
+            </th:block>
+        </footer>
+    </div>
+</body>
+</html>
+<script src="/js/createAccount.js"></script>

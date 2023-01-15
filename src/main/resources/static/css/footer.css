@@ -1,0 +1,42 @@
+
+
+footer{
+    border-top: 1px solid #dedede;
+    height: 100%;
+    display: flex;
+    align-items: start;
+    padding:50px 100px;
+}
+
+img#mylogo{
+    width: 200px;
+    height: 200px;
+    border-radius: 100px;
+    object-fit: cover;
+}
+footer > div{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+footer > div > div:first-child{
+    display: flex;
+    align-items: center;
+}
+footer > div >  div:last-child{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+footer > div .myInfo{
+    padding: 0 20px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+footer > div .myInfo span{
+    margin-bottom: 10px;
+}

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="itewon.seon.repository.AccountBookRepository" >
+    <resultMap id="SelectAccountBook" type="itewon.seon.dto.accountBook.SelectAccountBookDto"></resultMap>
+
+    <select id="selectMyAccountBook" resultMap="SelectAccountBook" parameterType="Long">
+        <![CDATA[
+        select
+            abSeq
+            ,ifNull(price,'') as price
+            ,ifNull(contents,'') as contents
+            ,ifNull(type,'') as type
+            ,regTimestamp
+            ,delNy
+            ,userSeq
+        from AccountBook
+            where userSeq = #{userSeq}
+            and delNy = 0
+        order by regTimestamp desc
+        ]]>
+    </select>
+
+    <select id="selectLastAccountBookOne" resultType="Long">
+        select
+            abSeq
+        from AccountBook
+        order by abSeq desc limit  1
+    </select>
+
+    <insert id="createAccountBook" parameterType="Long">
+        insert into AccountBook(
+                userSeq
+                ,regTimestamp
+        )values(
+                #{userSeq}
+               ,now()
+               )
+    </insert>
+
+    <update id="updateAccountBook">
+        <choose>
+            <when test='#{shKey} == "type"'>
+                insert into abType(
+                abSeq
+                ,typeName
+                )value(
+                #{abSeq}
+                ,#{shValue}
+                )
+                on duplicate key update typeName = #{shValue}, abSeq = #{abSeq}
+            </when>
+            <when test='#{shKey} == "price"'>
+                update AccountBook set
+                ${shKey}
+                =
+                #{shValue}
+                where abSeq = #{abSeq}
+            </when>
+            <otherwise>
+                update AccountBook set
+                ${shKey}
+                =
+                #{shValue}
+                where abSeq = #{abSeq}
+            </otherwise>
+        </choose>
+    </update>
+    <update id="deleteAccountBook" parameterType="Long">
+        update AccountBook set
+            delNy = 1
+        where abSeq = #{abSeq}
+    </update>
+</mapper>

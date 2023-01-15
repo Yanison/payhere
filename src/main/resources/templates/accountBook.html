@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Home</title>
+    <th:block th:replace="fragment/commonResources.html :: commonFragment">
+    </th:block>
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <th:block th:replace="fragment/header.html :: headerFragment">
+            </th:block>
+        </header>
+        <main>
+            <article>
+               <table class="theader">
+                   <colgroup>
+                       <col style="width: 5%"/>
+                       <col style="width: 20%"/>
+                       <col style="width: 20%"/>
+                       <col style="width: 30%"/>
+                       <col style="width: 10%"/>
+                       <col style="width: 5%"/>
+                   </colgroup>
+                   <thead>
+                       <tr>
+                           <td><input id="abChkAll" type="checkbox"></td>
+                           <td class="type">내역</td>
+                           <td class="price">금액</td>
+                           <td class="contents">메모</td>
+                           <td>날짜</td>
+                           <td>삭제</td>
+                       </tr>
+                   </thead>
+               </table >
+                <div class="tbodyDiv">
+                    <table id="tbody" class="tbody">
+                        <colgroup>
+                            <col style="width: 5%"/>
+                            <col style="width: 20%"/>
+                            <col style="width: 20%"/>
+                            <col style="width: 30%"/>
+                            <col style="width: 10%"/>
+                            <col style="width: 5%"/>
+                        </colgroup>
+                        <tbody th:if="${selectMyAccountBook}">
+                            <th:blcok th:each="list : ${selectMyAccountBook}">
+                                <tr th:value="${list.abSeq}">
+                                    <input class="abSeq"type="hidden" th:value="${list.abSeq}">
+                                    <td><input class="abChk" type="checkbox"></td>
+                                    <td class="type">
+                                        <input th:value="${list.type}" class="abInp" type="text" id="type" name="type"  placeholder="내역" autocomplete="off">
+
+                                    </td>
+                                    <td class="price"><input th:value="${list.price}" class="abInp" type="text" id="price" name="price" placeholder="금액"><i class="fa-solid fa-won-sign"></i></td>
+                                    <td class="contents"><input th:value="${list.contents}" class="abInp" type="text" id="contents" name="contents" placeholder="메모"></td>
+                                    <td class="timestamp" th:text="${#dates.format(list.regTimestamp, 'yyyy/MM/dd HH:mm')}"></td>
+                                    <td name="deleteAccountBookBtn" ><button id="deleteAccountBookBtn" class="deleteAccountBookBtn" name="deleteAccountBookBtn" th:value="${list.abSeq}" ><i class="fa-solid fa-x" name="deleteAccountBookBtn" style="color: red"></i></button></td>
+                                </tr>
+                            </th:blcok>
+                        </tbody>
+                        <tbody th:unless="${selectMyAccountBook}">
+                            <tr>
+                                data NotFount
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="utilDiv">
+                    <button id="addAccountBookBtn">가계부추가</button>
+                    <button id="deleteAccountBookChekedAllBtn">선택삭제</button>
+                </div>
+            </article>
+        </main>
+        <footer>
+            <th:block th:replace="fragment/footer.html :: footerFragment">
+            </th:block>
+        </footer>
+    </div>
+</body>
+</html>
+
+<link rel="stylesheet" href="/css/accountBook.css">
+<script src="/js/accountBook.js"></script>

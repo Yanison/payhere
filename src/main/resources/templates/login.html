@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Home</title>
+    <th:block th:replace="fragment/commonResources.html :: commonFragment">
+    </th:block>
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <th:block th:replace="fragment/header.html :: headerFragment">
+            </th:block>
+        </header>
+        <main>
+            <article>
+                <h1>로그인</h1>
+                <form method="post">
+                    <input id="userEmail"  name="userEmail" type="text" placeholder="Email" style="margin-bottom: 20px">
+                    <input id="userPw" name="userPw" type="text" placeholder="Password">
+                    <button id="loginBtn" type="button">로그인</button>
+                </form>
+                <div>
+                    <p style="margin-right: 50px">아직 회원이 아니세요?</p>
+                    <a href="/payhere/createAccount" class="createAccount">회원가입</a>
+                </div>
+            </article>
+        </main>
+        <footer>
+            <th:block th:replace="fragment/footer.html :: footerFragment">
+            </th:block>
+        </footer>
+    </div>
+</body>
+</html>
+
+<script src="/js/login.js"></script>
+<link rel="stylesheet" href="/css/login.css">

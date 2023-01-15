@@ -1,0 +1,28 @@
+header{
+    margin-bottom: 0 !important;
+}
+.myPage{
+    margin-left: 100px;
+}
+
+.myPage > a{
+    margin: 0px !important;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 700;
+}
+main{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 100px 0;
+}
+
+.checked{
+    color: lawngreen;
+}
+
+.unChecked{
+    color: darkred;
+}
