@@ -144,11 +144,11 @@ ResponsEntity를 좀더 다루어보고자 노력했지만 노력대비 결과�
 이번 프로젝트에서는 데이터 객체들이 각각의 본인의 역할에 최대한 Fit 하도록 설계하고자 했습니다.<br>
 그러나 의도한 기대보다는 설계적인 부분에 있어서 각각의 객체들의 역할 완성도가 떨어지는 것 같습니다. <br>
 
-- 가계부 내역분류 Dto
- 📂abType
-┣ 📜AbTypeListDto.java
-┣ 📜InsertTypeDto.java
-┗ 📜SelectTypeListDto.java
+- 가계부 내역분류 Dto<br>
+ 📂abType<br>
+┣ 📜AbTypeListDto.java<br>
+┣ 📜InsertTypeDto.java<br>
+┗ 📜SelectTypeListDto.java<br>
 <img width="300" alt="type" src="https://user-images.githubusercontent.com/88885019/212727853-83d8dfba-4cfa-40f2-b2aa-d46b23cc5b81.png">
 
 
@@ -156,36 +156,37 @@ ResponsEntity를 좀더 다루어보고자 노력했지만 노력대비 결과�
 
 
 
-- 가계부 CRUD Dto 
-📂accountBook
-┣ 📜CreateAccountBookDto.java
-┣ 📜DeleteAccountBookDto.java
-┣ 📜SelectAccountBookDto.java
-┗ 📜UpdateAccountBookDto.java
-- 가계부 내역분류 Dto 
-📂httpResponse
-┣ 📜ErrorCode.java
-┣ 📜ErrorResponse.java
-┗ 📜HttpResponseMessage.java
-- 가계부 내역분류 Dto 
-📂security
-┣ 📜AuthorityDto.java
-┗ 📜TokenDto.java
-- 가계부 내역분류 Dto 
-📂user
-┣ 📜CreateAccountDto.java
-┣ 📜CustomUserDetails.java
-┣ 📜LoginRequest.java
-┣ 📜LoginResponse.java
-┣ 📜SelectUserDto.java
-┣ 📜SignInRequest.java
-┗ 📜UserDto.java
+- 가계부 CRUD Dto<br> 
+📂accountBook<br>
+┣ 📜CreateAccountBookDto.java<br>
+┣ 📜DeleteAccountBookDto.java<br>
+┣ 📜SelectAccountBookDto.java<br>
+┗ 📜UpdateAccountBookDto.java<br>
+- 가계부 내역분류 Dto <br>
+📂httpResponse<br>
+┣ 📜ErrorCode.java<br>
+┣ 📜ErrorResponse.java<br>
+┗ 📜HttpResponseMessage.java<br>
+- 가계부 내역분류 Dto <br>
+📂security<br>
+┣ 📜AuthorityDto.java<br>
+┗ 📜TokenDto.java<br>
+- 가계부 내역분류 Dto <br>
+📂user<br>
+┣ 📜CreateAccountDto.java<br>
+┣ 📜CustomUserDetails.java<br>
+┣ 📜LoginRequest.java<br>
+┣ 📜LoginResponse.java<br>
+┣ 📜SelectUserDto.java<br>
+┣ 📜SignInRequest.java<br>
+┗ 📜UserDto.java<br>
 
 #### DB
 
 
 
 ## Front-End  프로젝트 구조
+
 
 
 📦src<br>
