@@ -129,18 +129,60 @@ ResponsEntity를 좀더 다루어보고자 노력했지만 노력대비 결과�
 #### Service Logic
  📂service
  serivce 설계는 클라이언트의 요청과 목적에 맞게 설계하였습니다.
+ - 가계부의 기능 요청 서비스 담당
   📜AccountBookService.java
+ - 유저의 인증/인가와 관련된 서비스 담당
   📜CustomUserDetailsService.java
+ - 메일인증을 위한 메일 발송 서비스 담당
   📜MailService.java
+ - 유저의 회원가입,로그인,로그아웃 서비스를 담당.
   📜UserService.java
 
 ##### DTO
 학원에서 배웠던 DTO를 설계하는 방식은 Entity 자체를 DTO로 사용하였던 방식이었습니다.<br> 
-그렇기 때문에 클라이언트와 데이터 요청을 주고받으면서 불필요한 데이터를 포함하곤 하였는데 <br>
+그렇기 때문에 클라이언트와 데이터 요청을 주고받으면서 불필요한 데이터를 포함하곤 하였고 과연 굳이 이렇게 해야할까 라는 의문이 들기도 하였습니다. <br>
 이번 프로젝트에서는 데이터 객체들이 각각의 본인의 역할에 최대한 Fit 하도록 설계하고자 했습니다.<br>
+그러나 의도한 기대보다는 설계적인 부분에 있어서 각각의 객체들의 역할 완성도가 떨어지는 것 같습니다. <br>
 
+- 가계부 내역분류 Dto
+ 📂abType
+┣ 📜AbTypeListDto.java
+┣ 📜InsertTypeDto.java
+┗ 📜SelectTypeListDto.java
+<img width="150" alt="type" src="https://user-images.githubusercontent.com/88885019/212727853-83d8dfba-4cfa-40f2-b2aa-d46b23cc5b81.png">
+
+
+
+
+
+
+- 가계부 CRUD Dto 
+📂accountBook
+┣ 📜CreateAccountBookDto.java
+┣ 📜DeleteAccountBookDto.java
+┣ 📜SelectAccountBookDto.java
+┗ 📜UpdateAccountBookDto.java
+- 가계부 내역분류 Dto 
+📂httpResponse
+┣ 📜ErrorCode.java
+┣ 📜ErrorResponse.java
+┗ 📜HttpResponseMessage.java
+- 가계부 내역분류 Dto 
+📂security
+┣ 📜AuthorityDto.java
+┗ 📜TokenDto.java
+- 가계부 내역분류 Dto 
+📂user
+┣ 📜CreateAccountDto.java
+┣ 📜CustomUserDetails.java
+┣ 📜LoginRequest.java
+┣ 📜LoginResponse.java
+┣ 📜SelectUserDto.java
+┣ 📜SignInRequest.java
+┗ 📜UserDto.java
 
 #### DB
+
 
 
 ## Front-End  프로젝트 구조
