@@ -227,11 +227,7 @@ function deleteAccountBook(nod){
         }
         ,type:'post'
         ,success:function (rp){
-            console.log(rp);
-            if(rp == 1){
-                let parentTr = nod.parentNode.parentNode
-                parentTr.remove();
-            }
+            removeRows(arr)
         }
     })
 }

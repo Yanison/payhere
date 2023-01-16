@@ -24,7 +24,7 @@ function requestLogin(){
         ,success:function (response){
             //setCookie("Authorization",token);
             console.log(response)
-            if(response.message == "ok"){
+            if(response.responseMessage == "ok"){
                 location.replace("/payhere/")
             }else{
                 alert("아이디 혹은 비밀번호를 확인해주세요")

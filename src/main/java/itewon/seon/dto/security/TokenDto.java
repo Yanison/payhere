@@ -1,4 +1,4 @@
-package itewon.seon.dto.user;
+package itewon.seon.dto.security;
 
 
 import lombok.*;
@@ -9,6 +9,5 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TokenDto {
-    private String accessToken;
-    private String refreshToken;
+    private String token;
 }

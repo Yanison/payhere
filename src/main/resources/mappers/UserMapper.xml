@@ -4,11 +4,12 @@
 <mapper namespace="itewon.seon.repository.UserRepository" >
 
     <resultMap id="user" type="itewon.seon.dto.user.UserDto"></resultMap>
-    <resultMap id="login" type="itewon.seon.dto.user.LoginDto"></resultMap>
+    <resultMap id="loginResponse" type="itewon.seon.dto.user.LoginResponse"></resultMap>
 
-    <select id="findUserByIdAndPw" resultMap="login">
+    <select id="findUserByIdAndPw" resultMap="loginResponse" parameterType="itewon.seon.dto.user.LoginRequest">
         select
             userSeq
+            ,userEmail
             ,userName
             ,count(*) cnt
         from User
@@ -16,9 +17,12 @@
         and userPw = #{userPw}
     </select>
 
-    <select id="findUserByEmail" resultType="Integer" parameterType="String">
+    <select id="findUserByEmail" resultType="itewon.seon.dto.user.CustomUserDetails" parameterType="String">
         select
              count(*) cnt
+            ,userEmail
+            ,userName
+            ,userSeq
         from User
         where userEmail = #{userEmail}
     </select>
@@ -37,16 +41,61 @@
         )
     </insert>
 
-    <insert id="insertToken" parameterType="itewon.seon.dto.abType.InsertTypeDto">
-        insert into abType(
-                           userSeq
-                          ,abSeq
-                          ,typeName
+
+
+
+
+
+
+
+
+
+
+    <insert id="signIn" parameterType="org.springframework.security.core.userdetails.User">
+        insert into User(
+             userEmail
+            ,userPw
+            ,regTimestamp
+        )values(
+            #{username}
+           ,#{password}
+           ,now()
+           )
+    </insert>
+
+    <select id="selectUserAuthoritiesByUserEmail" parameterType="String" resultType="itewon.seon.dto.security.AuthorityDto">
+        select
+            userSeq
+             ,authorityName
+        from authorities
+        where userEmail = #{userEmail}
+    </select>
+
+    <insert id="insertAuthority" parameterType="itewon.seon.dto.security.AuthorityDto">
+        insert into User(
+                 userSeq
+                ,authorityName
+        )values(
+                #{userSeq}
+               ,#{authorityName}
+               )
+    </insert>
+
+
+
+    <insert id="insertToken" parameterType="itewon.seon.dto.security.TokenDto">
+        insert into authorizedToken(
+           userSeq
+          ,accessToken
+          ,refreshToken
         )value(
             ${userSeq}
-            ,${abSeq}
-            ,#{typeName}
+            ,#{accessToken}
+            ,#{refreshToken}
             )
-        on duplicate key update typeName = #{typeName}, userSeq = ${userSeq}
+        on duplicate key update
+            userSeq = ${userSeq}
+            , accessToken = #{accessToken}
+            , refreshToken = #{refreshToken}
     </insert>
 </mapper>
