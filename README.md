@@ -27,9 +27,8 @@
 
 <br>
 <br>
-<br>
-<br>
-<br>
+
+# 프로젝트의 설계
 
 ### 사용언어 및 개발 환경<br>
 - DB : AWS RDS : Mysql5.7<br>
@@ -40,7 +39,8 @@
 - IDE : intelliJ
 - Library Managing : gradle,yml
 
-# 프로젝트의 API 및 설계
+<br>
+<br>
 
 
 ## Back-End 프로젝트 구조 개요
