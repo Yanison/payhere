@@ -106,7 +106,7 @@ Keyup 혹은 click 이벤트시 불러올 수 있도록 하였습니다. <br>
  .<br>
  .<br>
 
-#### Controller
+### Controller
 📂Controller<br>
 API 설계는 요청의 목적에 맞게 다음과 같이 분리하였습니다. <br>
 - 📜AuthController.java<br>
@@ -126,7 +126,7 @@ ResponsEntity를 좀더 다루어보고자 노력했지만 노력대비 결과�
 이전 API response를 다루던 방식들은 클라이언트에 불친절하고 명확하지 않은(에러근거가 없다거나..) 방식이었습니다. <br>
 이번 개발을 통하여 백엔드 개발자로서의 역할에 대해 좀 더 명확하게 깨닫는 계기가 된 것 같습니다. <br>
   
-#### Service Logic
+### Service Logic
  📂service
  serivce 설계는 클라이언트의 요청과 목적에 맞게 설계하였습니다.
  - 가계부의 기능 요청 서비스 담당
@@ -138,7 +138,7 @@ ResponsEntity를 좀더 다루어보고자 노력했지만 노력대비 결과�
  - 유저의 회원가입,로그인,로그아웃 서비스를 담당.
   📜UserService.java
 
-##### DTO
+#### DTO
 학원에서 배웠던 DTO를 설계하는 방식은 Entity 자체를 DTO로 사용하였던 방식이었습니다.<br> 
 그렇기 때문에 클라이언트와 데이터 요청을 주고받으면서 불필요한 데이터를 포함하곤 하였고 과연 굳이 이렇게 해야할까 라는 의문이 들기도 하였습니다. <br>
 이번 프로젝트에서는 데이터 객체들이 각각의 본인의 역할에 최대한 Fit 하도록 설계하고자 했습니다.<br>
@@ -150,10 +150,6 @@ ResponsEntity를 좀더 다루어보고자 노력했지만 노력대비 결과�
 ┣ 📜InsertTypeDto.java<br>
 ┗ 📜SelectTypeListDto.java<br>
 <img width="300" alt="type" src="https://user-images.githubusercontent.com/88885019/212727853-83d8dfba-4cfa-40f2-b2aa-d46b23cc5b81.png">
-
-
-
-
 
 
 - 가계부 CRUD Dto<br> 
@@ -220,10 +216,10 @@ jQuery는 간결한 코드로 Dom 객체를 쉽게 다룰 수 있는 강력한 J
  .<br>
  .<br>
  
- ### 주요 기능구현
+ ### 주요 기능구현 시연영상
  
- 
- 
+ [
+](https://youtu.be/Vmv2ejUwZTI) 
  
  # 마지막으로..
  
