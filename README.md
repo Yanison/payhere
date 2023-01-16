@@ -43,6 +43,12 @@
 <br>
 <br>
 
+## TestCase
+
+![TestCase](https://user-images.githubusercontent.com/88885019/212749795-10224c8d-712f-4f94-b6ee-f9fdaa29cfeb.png)
+
+<br>
+<br>
 
 ## Back-End 프로젝트 개요
 
