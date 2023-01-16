@@ -71,8 +71,16 @@ Keyup 혹은 click 이벤트시 불러올 수 있도록 하였습니다. <br>
  .<br>
 
 #### Controller
-Controller는  유저의 요청을 
+API 설계는 요청의 목적에 맞게 다음과 같이 분리하였습니다. 
+- 📜AuthController.java
+유저의 로그인 인증 및 인가를 담당하는 API 컨트롤러 입니다. <br>
+인증/인가와 관련한 서비스 로직은 미완성이 상태입니다.
+- 📜UserApiController.java
+유저의 회원가입 및 로그인 로그아웃 요청을 담당하는 API컨트롤러 입니다.<br>
+- 📜AccountBookApiController.java
 
+- 📜LocationController.java
+  
 #### Service Logic
 
 ##### DTO
