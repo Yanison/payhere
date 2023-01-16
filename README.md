@@ -217,13 +217,11 @@ jQuery는 간결한 코드로 Dom 객체를 쉽게 다룰 수 있는 강력한 J
  .<br>
  
  ### 주요 기능구현 시연영상
- 
- [
-](https://youtu.be/Vmv2ejUwZTI) 
- 
- # 마지막으로..
- 
- 
+  
+
+https://user-images.githubusercontent.com/88885019/212738233-09005f6f-66ea-45cb-a311-2fe1405d6855.mp4
+
+
  
  
  
