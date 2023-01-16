@@ -18,7 +18,7 @@
 
 #### 프로젝트 소감 및 후기
 이번 프로젝트를 통해서 스프링부트를 처음 접하게 되었습니다. <br>
-스프링 부트로 개발을 시작하고 진행하고 학습하면서 기존 프로젝트를 설계하는 방식 <br>
+기존 레거시 방식을 버리고 스프링 부트를 학습하면서 프로젝트를 설계하는 방식, <br>
 가령 DTO 설계에 있어 Entitiy와의 분리, Request와 Response 의 분리하여 <br>
 각자의 설계 목적에 명확하게 역할을 수행하도록 하는 설계방식은 <br>
 기존에 배웠던것들에 대한 의문들을 해소 시켜주었습니다.<br>
@@ -71,7 +71,7 @@ Keyup 혹은 click 이벤트시 불러올 수 있도록 하였습니다. <br>
 
 - 가계부 상세 세부내역
 참고한 가계부 스타일이 매우 심플하였기 때문에 <br>
-좀더 상세한 내역을 열람 할 수 있는 내용들을 추가하지 못한것에 아쉬움이 남습니다 <br>
+좀더 상세한 내역을 열람 할 수 있는 기능들을 추가하지 못한것에 아쉬움이 남습니다 <br>
 대신 사용자가 이용하기 편하도록 가계부의 UI 로직에 좀 더 신경썼기 떄문에 <br>
 편의성 면에서 완성도를 높였습니다. <br>
  
@@ -79,21 +79,29 @@ Keyup 혹은 click 이벤트시 불러올 수 있도록 하였습니다. <br>
  ## Back-End 프로젝트 구조
   📦src<br>
  📂seon<br>
+ - Api Controller
  ┣ 📂Controller <br>
+ - DB 및 Security 관련 configuration
  ┣ 📂config<br>
  ###<br>
+ - Data Transfer Object 관리 Package
  ┣ 📂dto  <br>
    ┣ 📂abType<br>
    ┣ 📂accountBook<br>
    ┣ 📂httpResponse<br>
    ┣ 📂security<br>
    ┗ 📂user<br>
+ - 예외처리 담당 패키지
  ┣ 📂exception<br>
+ - 토큰 인증관련 패키지
  ┣ 📂jwt<br>
+ - repository
  ┣ 📂repository<br>
+ - serivceLogic
  ┣ 📂service<br>
  ┣ 📂util<br>
  ┗ 📂resources<br>
+ - database sql mapper (mybatis)
   ┣ 📂mappers<br>
  .<br>
  .<br>
@@ -106,8 +114,15 @@ API 설계는 요청의 목적에 맞게 다음과 같이 분리하였습니다.
 - 📜UserApiController.java
 유저의 회원가입 및 로그인 로그아웃 요청을 담당하는 API컨트롤러 입니다.<br>
 - 📜AccountBookApiController.java
-
+가계부의 기능(CRUD)을 수행하기 위한 API Controller 입니다.
 - 📜LocationController.java
+페이징을 담당하는 컨트롤러 입니다.
+
+이번 프로젝트에서 API Controller를 설계하면서 HttpRequest,HttpResponse 를 좀 더 섬세하게 다루는 방법과 <br>
+예외처리를 방법에 대한 방향성을 얻는 계기가 되었습니다.
+이전 API response를 다루던 방식들은 클라이언트에 불친절하고 명확하지 않은(에러코드가 없다거나..) 방식이었던걸 깨달
+백엔드 개발자의 본분에 대해 좀 더 명확하게 깨닫는 계기가 되었습니다 <br>
+
   
 #### Service Logic
 
