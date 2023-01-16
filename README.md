@@ -185,11 +185,22 @@ ResponsEntity를 좀더 다루어보고자 노력했지만 노력대비 결과�
 
 
 
-## Front-End  프로젝트 구조
+
+## Front-End  프로젝트 구조 개요
 
 Front-End 개발자 전형인가.. 싶을정도로 Back-end 기능 구현보다 열심히 한 것 같았습니다.<br>
-JS언어를 다루며 프론트 개발에 즐거움을 느끼긴 하지만 <br>
+이전엔 주로 JSP를 다루었지만 스프링 부트로 개발하면서 thymeLeaf 템플릿도 처음 접하게 되었습니다. <br> 
+프론트 언어를 다루며 프론트 개발에 즐거움을 느끼긴 하지만 <br>
 좀 더 시간 분배를 잘 해서 Back-end쪽 구현의 완성도를 높이지 못한게 많이 아쉬움이 남습니다.<br>
+이번 프로젝트에서 Front-End 개발의 방향성은 jQuery로부터 멀어지고자 하는것이였습니다. <br>
+jQuery는 간결한 코드로 Dom 객체를 쉽게 다룰 수 있는 강력한 JS라이브러리 이지만<br>
+쉽게 사용할 수 있는 만큼 JS를 이해하는데에 방해된다고 생각합니다.<br>
+그래서 Vanila JS만을 사용하여(서버쪽 요청은 Ajax 이지만..) 직접적인 Dom 객체들을 컨트롤 하여 UI를 구성하는 것이 이번 Front-Side의 목표였습니다.<br>
+성능 이슈같은 주제까지 갈 만큼 수준높은 코드는 아니지만  <br>
+목적에 맞게 순수 JS로만 프로젝트를 구성을 하였기 때문에 결과물이 나름 만족스럽다 생각합니다. <br>
+
+
+## Front-End  프로젝트 구조
 
 📦src<br>
  .<br>
@@ -197,15 +208,27 @@ JS언어를 다루며 프론트 개발에 즐거움을 느끼긴 하지만 <br>
  .<br>
  📦src<br>
  📂seon<br>
+ - Resources
  ┣ 📂static<br>
  ┃ ┣ 📂css<br>
  ┃ ┣ 📂img<br>
  ┃ ┗ 📂js<br>
+ - Html templates (ThymeLeaf)
  ┣ 📂templates<br>
  ┃ ┣ 📂fragment<br>
  ┃ ┣ 📜 HTMLs...<br>
  .<br>
  .<br>
+ 
+ ### 주요 기능구현
+ 
+ 
+ 
+ 
+ # 마지막으로..
+ 
+ 
+ 
  
  
  
