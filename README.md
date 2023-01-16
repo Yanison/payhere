@@ -14,109 +14,57 @@
 
 # 프로젝트의 API 및 설계
 
-## Back-End
 
+## Back-End 프로젝트 구조 개요
+ 📦src<br>
+ 📂seon<br>
+ ┣ 📂Controller <br>
+ ┣ 📂config<br>
+ ###<br>
+ ┣ 📂dto  <br>
+   ┣ 📂abType<br>
+   ┣ 📂accountBook<br>
+   ┣ 📂httpResponse<br>
+   ┣ 📂security<br>
+   ┗ 📂user<br>
+ ┣ 📂exception<br>
+ ┣ 📂jwt<br>
+ ┣ 📂repository<br>
+ ┣ 📂service<br>
+ ┣ 📂util<br>
+ ┗ 📂resources<br>
+ SQL 질의 
+  ┣ 📂mappers<br>
+ .
+ .
+ .
 
-## Front-End
+### 구현한 부분
 
-📦src
- ┣ 📂main
- ┃ ┣ 📂java
- ┃ ┃ ┗ 📂itewon
- ┃ ┃ ┃ ┗ 📂seon
- ┃ ┃ ┃ ┃ ┣ 📂Controller
- ┃ ┃ ┃ ┃ ┃ ┣ 📜AccountBookApiController.java
- ┃ ┃ ┃ ┃ ┃ ┣ 📜AuthController.java
- ┃ ┃ ┃ ┃ ┃ ┣ 📜LocationController.java
- ┃ ┃ ┃ ┃ ┃ ┗ 📜UserApiController.java
- ┃ ┃ ┃ ┃ ┣ 📂common
- ┃ ┃ ┃ ┃ ┃ ┗ 📜CommonVo.java
- ┃ ┃ ┃ ┃ ┣ 📂config
- ┃ ┃ ┃ ┃ ┃ ┣ 📜DatabaseConfig.java
- ┃ ┃ ┃ ┃ ┃ ┗ 📜SecurityConfig.java
- ┃ ┃ ┃ ┃ ┣ 📂dto
- ┃ ┃ ┃ ┃ ┃ ┣ 📂abType
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜AbTypeListDto.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜InsertTypeDto.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜SelectTypeListDto.java
- ┃ ┃ ┃ ┃ ┃ ┣ 📂accountBook
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CreateAccountBookDto.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜DeleteAccountBookDto.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜SelectAccountBookDto.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜UpdateAccountBookDto.java
- ┃ ┃ ┃ ┃ ┃ ┣ 📂httpResponse
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜ErrorCode.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜ErrorResponse.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜HttpResponseMessage.java
- ┃ ┃ ┃ ┃ ┃ ┣ 📂security
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜AuthorityDto.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜TokenDto.java
- ┃ ┃ ┃ ┃ ┃ ┗ 📂user
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CreateAccountDto.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CustomUserDetails.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜LoginRequest.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜LoginResponse.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜SelectUserDto.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜SignInRequest.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜UserDto.java
- ┃ ┃ ┃ ┃ ┣ 📂exception
- ┃ ┃ ┃ ┃ ┃ ┣ 📜DuplicateMemberException.java
- ┃ ┃ ┃ ┃ ┃ ┗ 📜NotFoundMemberException.java
- ┃ ┃ ┃ ┃ ┣ 📂jwt
- ┃ ┃ ┃ ┃ ┃ ┣ 📜JwtAccessDeniedHandler.java
- ┃ ┃ ┃ ┃ ┃ ┣ 📜JwtAuthenticationEntryPoint.java
- ┃ ┃ ┃ ┃ ┃ ┣ 📜JwtFilter.java
- ┃ ┃ ┃ ┃ ┃ ┣ 📜JwtSecurityConfig.java
- ┃ ┃ ┃ ┃ ┃ ┗ 📜TokenProvider.java
- ┃ ┃ ┃ ┃ ┣ 📂repository
- ┃ ┃ ┃ ┃ ┃ ┣ 📜AbTypeRepository.java
- ┃ ┃ ┃ ┃ ┃ ┣ 📜AccountBookRepository.java
- ┃ ┃ ┃ ┃ ┃ ┗ 📜UserRepository.java
- ┃ ┃ ┃ ┃ ┣ 📂service
- ┃ ┃ ┃ ┃ ┃ ┣ 📜AccountBookService.java
- ┃ ┃ ┃ ┃ ┃ ┣ 📜CustomUserDetailsService.java
- ┃ ┃ ┃ ┃ ┃ ┣ 📜MailService.java
- ┃ ┃ ┃ ┃ ┃ ┗ 📜UserService.java
- ┃ ┃ ┃ ┃ ┣ 📂util
- ┃ ┃ ┃ ┃ ┃ ┗ 📜SecurityUtil.java
- ┃ ┃ ┃ ┃ ┗ 📜SeonApplication.java
- ┃ ┗ 📂resources
- ┃ ┃ ┣ 📂mappers
- ┃ ┃ ┃ ┣ 📜AbTypeMapper.xml
- ┃ ┃ ┃ ┣ 📜AccountBookMapper.xml
- ┃ ┃ ┃ ┗ 📜UserMapper.xml
- ┃ ┃ ┣ 📂static
- ┃ ┃ ┃ ┣ 📂css
- ┃ ┃ ┃ ┃ ┣ 📜accountBook.css
- ┃ ┃ ┃ ┃ ┣ 📜common.css
- ┃ ┃ ┃ ┃ ┣ 📜createAccount.css
- ┃ ┃ ┃ ┃ ┣ 📜footer.css
- ┃ ┃ ┃ ┃ ┣ 📜header.css
- ┃ ┃ ┃ ┃ ┣ 📜home.css
- ┃ ┃ ┃ ┃ ┗ 📜login.css
- ┃ ┃ ┃ ┣ 📂img
- ┃ ┃ ┃ ┃ ┣ 📜img_hero_4.png
- ┃ ┃ ┃ ┃ ┣ 📜logo.png
- ┃ ┃ ┃ ┃ ┗ 📜yanison.png
- ┃ ┃ ┃ ┗ 📂js
- ┃ ┃ ┃ ┃ ┣ 📜accountBook.js
- ┃ ┃ ┃ ┃ ┣ 📜addAccountBook.js
- ┃ ┃ ┃ ┃ ┣ 📜createAccount.js
- ┃ ┃ ┃ ┃ ┣ 📜header.js
- ┃ ┃ ┃ ┃ ┣ 📜home.js
- ┃ ┃ ┃ ┃ ┗ 📜login.js
- ┃ ┃ ┣ 📂templates
- ┃ ┃ ┃ ┣ 📂fragment
- ┃ ┃ ┃ ┃ ┣ 📜commonResources.html
- ┃ ┃ ┃ ┃ ┣ 📜footer.html
- ┃ ┃ ┃ ┃ ┗ 📜header.html
- ┃ ┃ ┃ ┣ 📜accountBook.html
- ┃ ┃ ┃ ┣ 📜createAccount.html
- ┃ ┃ ┃ ┣ 📜home.html
- ┃ ┃ ┃ ┗ 📜login.html
- ┃ ┃ ┗ 📜application.yml
- ┗ 📂test
- ┃ ┗ 📂java
- ┃ ┃ ┗ 📂itewon
- ┃ ┃ ┃ ┗ 📂seon
- ┃ ┃ ┃ ┃ ┗ 📜SeonApplicationTests.java
+가계부 관련 RestAPI
+- 가계부 작성하기 (내역,금액,상세메모 내용을 포함합니다)
+- 가계부 수정하기 (내역,금액,상세메오 등을 각각 자유롭게 수정 가능합니다)
+- 가계부 삭제하기 (가계부 Row의 삭제는 일반 삭제와 영구삭제 두가지가 있습니다. 일반삭제한 가계부 내역만 복구가 가능합니다.)
+- 가계부 불러오기 (가계부 내역은 일반 내역과 삭제한 내역을 각각 다른 페이지에서 따로 불러올 수 있습니다.)
+
+### 미완성인 부분
+- JWT + Security 를 적용한 로그인 인가 기능 구현
+
+## Front-End  프로젝트 구조
+📦src<br>
+ .<br>
+ .<br>
+ .<br>
+ 📦src<br>
+ 📂seon<br>
+ ┣ 📂static<br>
+ ┃ ┣ 📂css<br>
+ ┃ ┣ 📂img<br>
+ ┃ ┗ 📂js<br>
+ ┣ 📂templates<br>
+ ┃ ┣ 📂fragment<br>
+ ┃ ┣ 📜 HTMLs...<br>
+ 
+ 
+ 
+ 
