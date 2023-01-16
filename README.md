@@ -208,12 +208,12 @@ jQuery는 간결한 코드로 Dom 객체를 쉽게 다룰 수 있는 강력한 J
  .<br>
  📦src<br>
  📂seon<br>
- - Resources
+ - Resources<br>
  ┣ 📂static<br>
  ┃ ┣ 📂css<br>
  ┃ ┣ 📂img<br>
  ┃ ┗ 📂js<br>
- - Html templates (ThymeLeaf)
+ - Html templates (ThymeLeaf)<br>
  ┣ 📂templates<br>
  ┃ ┣ 📂fragment<br>
  ┃ ┣ 📜 HTMLs...<br>
