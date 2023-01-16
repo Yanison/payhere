@@ -79,55 +79,66 @@ Keyup 혹은 click 이벤트시 불러올 수 있도록 하였습니다. <br>
  ## Back-End 프로젝트 구조
   📦src<br>
  📂seon<br>
- - Api Controller
+ - Api Controller<br>
  ┣ 📂Controller <br>
- - DB 및 Security 관련 configuration
+ - DB 및 Security 관련 configuration<br>
  ┣ 📂config<br>
  ###<br>
- - Data Transfer Object 관리 Package
+ - Data Transfer Object 관리 Package<br>
  ┣ 📂dto  <br>
    ┣ 📂abType<br>
    ┣ 📂accountBook<br>
    ┣ 📂httpResponse<br>
    ┣ 📂security<br>
    ┗ 📂user<br>
- - 예외처리 담당 패키지
+ - 예외처리 담당 패키지<br>
  ┣ 📂exception<br>
- - 토큰 인증관련 패키지
+ - 토큰 인증관련 패키지<br>
  ┣ 📂jwt<br>
- - repository
+ - repository<br>
  ┣ 📂repository<br>
- - serivceLogic
+ - serivceLogic<br>
  ┣ 📂service<br>
  ┣ 📂util<br>
  ┗ 📂resources<br>
- - database sql mapper (mybatis)
+ - database sql mapper (mybatis)<br>
   ┣ 📂mappers<br>
  .<br>
  .<br>
 
 #### Controller
-API 설계는 요청의 목적에 맞게 다음과 같이 분리하였습니다. 
-- 📜AuthController.java
+📂Controller<br>
+API 설계는 요청의 목적에 맞게 다음과 같이 분리하였습니다. <br>
+- 📜AuthController.java<br>
 유저의 로그인 인증 및 인가를 담당하는 API 컨트롤러 입니다. <br>
-인증/인가와 관련한 서비스 로직은 미완성이 상태입니다.
-- 📜UserApiController.java
+인증/인가와 관련한 서비스 로직은 미완성이 상태입니다.<br>
+- 📜UserApiController.java<br>
 유저의 회원가입 및 로그인 로그아웃 요청을 담당하는 API컨트롤러 입니다.<br>
-- 📜AccountBookApiController.java
-가계부의 기능(CRUD)을 수행하기 위한 API Controller 입니다.
-- 📜LocationController.java
-페이징을 담당하는 컨트롤러 입니다.
+- 📜AccountBookApiController.java<br>
+가계부의 기능(CRUD)을 수행하기 위한 API Controller 입니다.<br>
+- 📜LocationController.java<br>
+페이징을 담당하는 컨트롤러 입니다.<br>
+
 
 이번 프로젝트에서 API Controller를 설계하면서 HttpRequest,HttpResponse 를 좀 더 섬세하게 다루는 방법, 그리고 <br>
 예외처리를 방법에 대한 방향성을 얻는 계기가 되었습니다. <br>
-이전 API response를 다루던 방식들은 클라이언트에 불친절하고 명확하지 않은(에러코드가 없다거나..) 방식이었습니다. <br>
+ResponsEntity를 좀더 다루어보고자 노력했지만 노력대비 결과가 많이 부족한 것 같습니다. <br>
+이전 API response를 다루던 방식들은 클라이언트에 불친절하고 명확하지 않은(에러근거가 없다거나..) 방식이었습니다. <br>
 이번 개발을 통하여 백엔드 개발자로서의 역할에 대해 좀 더 명확하게 깨닫는 계기가 된 것 같습니다. <br>
-
   
 #### Service Logic
+ 📂service
+ serivce 설계는 클라이언트의 요청과 목적에 맞게 설계하였습니다.
+  📜AccountBookService.java
+  📜CustomUserDetailsService.java
+  📜MailService.java
+  📜UserService.java
 
 ##### DTO
-기존에 스프링 레거시에서 개발을
+학원에서 배웠던 DTO를 설계하는 방식은 Entity 자체를 DTO로 사용하였던 방식이었습니다.<br> 
+그렇기 때문에 클라이언트와 데이터 요청을 주고받으면서 불필요한 데이터를 포함하곤 하였는데 <br>
+이번 프로젝트에서는 데이터 객체들이 각각의 본인의 역할에 최대한 Fit 하도록 설계하고자 했습니다.<br>
+
 
 #### DB
 
