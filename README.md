@@ -138,7 +138,7 @@ ResponsEntity를 좀더 다루어보고자 노력했지만 노력대비 결과�
  - 유저의 회원가입,로그인,로그아웃 서비스를 담당.
   📜UserService.java
 
-#### DTO
+#### DTO & DB
 학원에서 배웠던 DTO를 설계하는 방식은 Entity 자체를 DTO로 사용하였던 방식이었습니다.<br> 
 그렇기 때문에 클라이언트와 데이터 요청을 주고받으면서 불필요한 데이터를 포함하곤 하였고 과연 굳이 이렇게 해야할까 라는 의문이 들기도 하였습니다. <br>
 이번 프로젝트에서는 데이터 객체들이 각각의 본인의 역할에 최대한 Fit 하도록 설계하고자 했습니다.<br>
@@ -176,9 +176,15 @@ ResponsEntity를 좀더 다루어보고자 노력했지만 노력대비 결과�
 ┣ 📜SelectUserDto.java<br>
 ┣ 📜SignInRequest.java<br>
 ┗ 📜UserDto.java<br>
-
-#### DB
-
+- Database sql Mapper
+📂mappers
+ ┣ 📜AbTypeMapper.xml
+ ┣ 📜AccountBookMapper.xml
+ ┗ 📜UserMapper.xml
+ 
+ #DB ERD
+ 
+ ![image](https://user-images.githubusercontent.com/88885019/212740359-0b49517e-310e-46b2-8d1b-e2a283e34c1c.png)
 
 
 
