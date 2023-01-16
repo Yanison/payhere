@@ -1,9 +1,17 @@
 # [페이히어] 백엔드 엔지니어 과제
 
 <img width="800px" alt="home" src="https://user-images.githubusercontent.com/88885019/212714790-61314465-8f34-4fe1-8f02-a72fd96bbfc8.png">
+<br>
+<br>
 
-
-
+### 목차
+- 프로젝트 개요 및 목적
+- 프로젝트의 설계
+- Back-End 프로젝트 구조 개요
+- Back-End 프로젝트 구조
+- Front-End 프로젝트 구조 개요
+- Front-End 프로젝트 구조
+- 가계부 주요기능 시연영상
 
 <br>
 <br>
@@ -43,7 +51,7 @@
 <br>
 
 
-## Back-End 프로젝트 구조 개요
+## Back-End 프로젝트 개요
 
 
 ### 구현한 부분
@@ -188,7 +196,7 @@ ResponsEntity를 좀더 다루어보고자 노력했지만 노력대비 결과�
 
 
 
-## Front-End  프로젝트 구조 개요
+## Front-End 프로젝트 개요
 
 Front-End 개발자 전형인가.. 싶을정도로 Back-end 기능 구현보다 열심히 한 것 같았습니다.<br>
 이전엔 주로 JSP를 다루었지만 스프링 부트로 개발하면서 thymeLeaf 템플릿도 처음 접하게 되었습니다. <br> 
@@ -202,7 +210,7 @@ jQuery는 간결한 코드로 Dom 객체를 쉽게 다룰 수 있는 강력한 J
 목적에 맞게 순수 JS로만 프로젝트를 구성을 하였기 때문에 결과물이 나름 만족스럽다 생각합니다. <br>
 
 
-## Front-End  프로젝트 구조
+## Front-End 프로젝트  구조
 
 📦src<br>
  .<br>
