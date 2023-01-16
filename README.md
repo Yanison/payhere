@@ -11,6 +11,7 @@
 - BackEnd-Framework:Spring Boot,mybatis<br>
 - was:tomcat 9.0<br>
 - IDE : intelliJ
+- Library Managing : gradle,yml
 
 # 프로젝트의 API 및 설계
 
