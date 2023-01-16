@@ -19,10 +19,10 @@
                 <h1>가계부의 새로운 미래, 페이히어</h1>
                 <div th:if="${userSeq}">
                     <a href="/payhere/accountBook">나의 가계부</a>
-                    <a id="logOutBtn">로그아웃 하기</a>
+                    <a onclick="logOutBtn()">로그아웃</a>
                 </div>
                 <div th:unless="${userSeq}">
-                    <a href="/payhere/accountBook">나의 가계부</a>
+                    <a onclick="ddd()">나의 가계부</a>
                     <a href="/payhere/login">로그인</a>
                     <a href="/payhere/createAccount">회원가입</a>
                 </div>
