@@ -149,7 +149,7 @@ ResponsEntity를 좀더 다루어보고자 노력했지만 노력대비 결과�
 ┣ 📜AbTypeListDto.java
 ┣ 📜InsertTypeDto.java
 ┗ 📜SelectTypeListDto.java
-<img width="150" alt="type" src="https://user-images.githubusercontent.com/88885019/212727853-83d8dfba-4cfa-40f2-b2aa-d46b23cc5b81.png">
+<img width="300" alt="type" src="https://user-images.githubusercontent.com/88885019/212727853-83d8dfba-4cfa-40f2-b2aa-d46b23cc5b81.png">
 
 
 
