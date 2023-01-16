@@ -72,3 +72,6 @@ h1{
     position: absolute;
     top: 20%;
 }
+button,a{
+    cursor: pointer;
+}

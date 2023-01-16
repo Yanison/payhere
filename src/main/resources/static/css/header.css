@@ -26,3 +26,6 @@ main{
 .unChecked{
     color: darkred;
 }
+button{
+    cursor: pointer;
+}
