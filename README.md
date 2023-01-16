@@ -1,6 +1,6 @@
 # [페이히어] 백엔드 엔지니어 과제
 
-<img width="400px" alt="home" src="https://user-images.githubusercontent.com/88885019/212714790-61314465-8f34-4fe1-8f02-a72fd96bbfc8.png">
+<img width="800px" alt="home" src="https://user-images.githubusercontent.com/88885019/212714790-61314465-8f34-4fe1-8f02-a72fd96bbfc8.png">
 
 
 
