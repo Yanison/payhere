@@ -237,6 +237,7 @@ const checkAll = (target) => {
     document.querySelectorAll('input[name="abRowCheckBox"]')
         .forEach(el => {
             el.checked = isChecked;
+
         });
 }
 
