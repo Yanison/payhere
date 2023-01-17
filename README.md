@@ -239,6 +239,7 @@ https://user-images.githubusercontent.com/88885019/212751113-bfa6d9d7-1cb5-4f27-
 <br>
 <br>
 
+즉각적으로 서버에 반영이 되는 가계부를 만들고 싶어서 가계부의 쓰기(혹은 업데이트)기능은 keyup 이벤트나 focusout 이벤트에 등록하여 구현하였습니다.
 
 ```
 tbody.addEventListener("keyup", (e)=>{
@@ -248,11 +249,13 @@ if(e.target !== e.currentTarget){
    let abSeq = e.target.parentNode.parentNode.querySelector('button').value;
    let thisNod = e.target;
    console.log(shKey)
+   //가계부에 기입할 메모,금액
    if(shKey =="price" || shKey =="contents"){
        if(shKey =="price"){
            thisNod.value = localString(shValue)
        }
        updateAccountBook(thisNod)
+   
    }else if(shKey == "type"){
        selectTypeList(thisNod)
    }
@@ -260,6 +263,9 @@ if(e.target !== e.currentTarget){
 e.stopPropagation()
 })
 ```
+
+만약 가계부의 내용을 업데이트 하고싶다면 따로 수정하기 버튼없이 등록된 keyup 이벤트로 동일하게 작성할 수 있도록 하였습니다.
+이 부분은 sql부분에서 upsert 쿼리를 작성하여 기능을 구현하였습니다.
 
 
  
