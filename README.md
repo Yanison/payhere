@@ -11,7 +11,6 @@
 - Back-End 프로젝트 구조
 - Front-End 프로젝트 구조 개요
 - Front-End 프로젝트 구조
-- 가계부 주요기능 시연영상
 - 소감 및 후기
 
 <br>
@@ -228,20 +227,50 @@ Front-End 개발자 전형인가.. 싶을정도로 Back-end 기능 구현보다 
  .<br>
  .<br>
  
- ### 가계부 CRUD 기능구현 시연영상
- <br>
-  
-
-https://user-images.githubusercontent.com/88885019/212751113-bfa6d9d7-1cb5-4f27-a0cb-4ef72bde9a0c.mp4
-
 
 <br>
 <br>
 <br>
+클라이언트의 가계부 데이터는 ajax로 서버와 소통합니다.
+즉각적으로 서버에 반영이 되는 다니나믹한 가계부 어플리케이션을 만들고 싶어서 가계부의 쓰기(혹은 업데이트)기능은 keyup 이벤트나 focusout 이벤트에 등록하는 방식으로 구현하였습니다.
 
-즉각적으로 서버에 반영이 되는 가계부를 만들고 싶어서 가계부의 쓰기(혹은 업데이트)기능은 keyup 이벤트나 focusout 이벤트에 등록하여 구현하였습니다.
-클라이언트의 가계부 데이터는 ajax로 서버와 소통합니다. 
+
+
+ ```
+ 가계부 Row 추가
+ function addAccountBook(){
+    let htmlStr ="";
+    $.ajax({
+        url:'/api/accountbook/create'
+        ,data:{userSeq : userSeq.value}
+        ,type:'post'
+        ,success:function (seq){
+            console.log("create abRow :: abSqe_" + seq)
+            htmlStr +=
+                `
+                <tr id="`+seq+`" value="`+seq+`">
+                    <input class="abSeq" type="hidden" name="abRowSeq" value="`+seq+`">
+                    <input class="abSeq" type="hidden" value="`+seq+`">
+                    <td><input class="abChk" name="abRowCheckBox" type="checkbox"></td>
+                    <td class="type">
+                        <input class="abInp" type="text" id="type" name="type" placeholder="내역" autocomplete="off">
+                    </td>
+                    <td class="price"><input class="abInp" type="text" id="price" name="price" placeholder="금액" ><i class="fa-solid fa-won-sign"></i>                       </td>
+                    <td class="contents"><input class="abInp" type="text" id="content" name="content" placeholder="메모" ></td>
+                    <td class="timestamp">방금전</td>
+                    <td name="deleteAccountBookBtn" ><button id="deleteAccountBookBtn" class="deleteAccountBookBtn" name="deleteAccountBookBtn"                              value="`+seq+`"><i class="fa-solid fa-x" style="color: red"></i></button></td>
+                 </tr>
+            `
+            tbody.querySelector('tbody')
+                .insertAdjacentHTML('afterbegin',htmlStr);
+        }
+    })
+}
+ ```
+
+가계부 내역 업데이트 
 ```
+// 가계부 업데이트
 tbody.addEventListener("keyup", (e)=>{
 if(e.target !== e.currentTarget){
    let shKey = e.target.name;
@@ -263,6 +292,9 @@ if(e.target !== e.currentTarget){
 e.stopPropagation()
 })
 ```
+
+<br>
+<br>
 
 만약 가계부의 내용을 업데이트 하고싶다면 따로 수정하기 버튼없이 등록된 keyup 이벤트로 동일하게 작성할 수 있도록 하였습니다.
 이 부분은 sql부분에서 upsert 쿼리를 작성하여 기능을 구현하였습니다.
