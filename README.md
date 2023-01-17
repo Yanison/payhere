@@ -243,8 +243,7 @@ https://user-images.githubusercontent.com/88885019/212751113-bfa6d9d7-1cb5-4f27-
 <table>
  <tr>
    <td>
-    ```
-tbody.addEventListener("keyup", (e)=>{
+    ```tbody.addEventListener("keyup", (e)=>{
     if(e.target !== e.currentTarget){
         let shKey = e.target.name;
         let shValue = e.target.value;
@@ -261,14 +260,11 @@ tbody.addEventListener("keyup", (e)=>{
         }
     }
     e.stopPropagation()
-})
-
-```
+})```
    </td>
   
   <td>
-   ```
-tbody.addEventListener("keyup", (e)=>{
+   ```tbody.addEventListener("keyup", (e)=>{
     if(e.target !== e.currentTarget){
         let shKey = e.target.name;
         let shValue = e.target.value;
@@ -285,9 +281,7 @@ tbody.addEventListener("keyup", (e)=>{
         }
     }
     e.stopPropagation()
-})
-
-```
+})```
    </td>
   </tr>
 </table>
