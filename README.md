@@ -235,7 +235,32 @@ Front-End 개발자 전형인가.. 싶을정도로 Back-end 기능 구현보다 
 https://user-images.githubusercontent.com/88885019/212751113-bfa6d9d7-1cb5-4f27-a0cb-4ef72bde9a0c.mp4
 
 
+<br>
+<br>
+<br>
 
+
+```
+tbody.addEventListener("keyup", (e)=>{
+    if(e.target !== e.currentTarget){
+        let shKey = e.target.name;
+        let shValue = e.target.value;
+        let abSeq = e.target.parentNode.parentNode.querySelector('button').value;
+        let thisNod = e.target;
+        console.log(shKey)
+        if(shKey =="price" || shKey =="contents"){
+            if(shKey =="price"){
+                thisNod.value = localString(shValue)
+            }
+            updateAccountBook(thisNod)
+        }else if(shKey == "type"){
+            selectTypeList(thisNod)
+        }
+    }
+    e.stopPropagation()
+})
+
+```
 
 
  
