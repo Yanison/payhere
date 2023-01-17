@@ -240,11 +240,10 @@ https://user-images.githubusercontent.com/88885019/212751113-bfa6d9d7-1cb5-4f27-
 <br>
 
 
-
-<div display="flex">
- <div>
-
-```
+<table>
+ <tr>
+   <td>
+    ```
 tbody.addEventListener("keyup", (e)=>{
     if(e.target !== e.currentTarget){
         let shKey = e.target.name;
@@ -265,9 +264,10 @@ tbody.addEventListener("keyup", (e)=>{
 })
 
 ```
-</div>
-<div>
- ```
+   </td>
+  
+  <td>
+   ```
 tbody.addEventListener("keyup", (e)=>{
     if(e.target !== e.currentTarget){
         let shKey = e.target.name;
@@ -288,8 +288,10 @@ tbody.addEventListener("keyup", (e)=>{
 })
 
 ```
-</div>
-</div>
+   </td>
+  </tr>
+</table>
+
 
  
 <br>
