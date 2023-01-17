@@ -156,22 +156,22 @@ ResponsEntity를 좀더 다루어보고자 노력했지만 노력대비 결과�
 ┣ 📜InsertTypeDto.java<br>
 ┗ 📜SelectTypeListDto.java<br>
 
-- 가계부 CRUD Dto<br> 
+- 가계부 CRUD 관련 Dto<br> 
 📂accountBook<br>
 ┣ 📜CreateAccountBookDto.java<br>
 ┣ 📜DeleteAccountBookDto.java<br>
 ┣ 📜SelectAccountBookDto.java<br>
 ┗ 📜UpdateAccountBookDto.java<br>
-- 가계부 내역분류 Dto <br>
+- HttpResponse Dto <br>
 📂httpResponse<br>
 ┣ 📜ErrorCode.java<br>
 ┣ 📜ErrorResponse.java<br>
 ┗ 📜HttpResponseMessage.java<br>
-- 가계부 내역분류 Dto <br>
+- 인증,인가 관련 Dto <br>
 📂security<br>
 ┣ 📜AuthorityDto.java<br>
 ┗ 📜TokenDto.java<br>
-- 가계부 내역분류 Dto <br>
+- 유저의 CRUD 관련 Dto <br>
 📂user<br>
 ┣ 📜CreateAccountDto.java<br>
 ┣ 📜CustomUserDetails.java<br>
