@@ -232,13 +232,56 @@ Front-End 개발자 전형인가.. 싶을정도로 Back-end 기능 구현보다 
 <br>
 <br>
 클라이언트의 가계부 데이터는 ajax로 서버와 소통합니다.<br>
-즉각적으로 서버에 반영이 되는 다니나믹한 가계부 어플리케이션을 구현하고 싶었습니다(Notion 같은..).<br> 
+평소에 노션으로도 종종 가계부를 작성하곤 하였기 때문에 즉각적으로 서버에 반영이 되는 다니나믹한 가계부 어플리케이션을 구현하고 싶었습니다(Notion 같은..).<br> 
+(websocket을 연동하여 다른 브라우저에서도 반영이 되는 것을 실시간으로 볼 수 있는 기능까지 기대했으나 아쉽게도 시간 부족으로 구현하지는 못했습니다.)<br>
 그렇기 때문에 가계부의 쓰기(혹은 업데이트)기능은 따로 버튼없이 keyup 이벤트나 focusout 이벤트에 등록하는 방식으로 구현하였습니다.<br>
 
 ### js/accountBook.addAccountBook()
 
+가계부 내역 쓰기or업데이트
+```
+// 가계부 업데이트
+tbody.addEventListener("keyup", (e)=>{
+if(e.target !== e.currentTarget){
+   let shKey = e.target.name;
+   let shValue = e.target.value;
+   let abSeq = e.target.parentNode.parentNode.querySelector('button').value;
+   let thisNod = e.target;
+   console.log(shKey)
+   //가계부에 기입할 메모,금액
+   if(shKey =="price" || shKey =="contents"){
+       if(shKey =="price"){
+           thisNod.value = localString(shValue)
+       }
+       updateAccountBook(thisNod)//Ajax
+   
+   }else if(shKey == "type"){
+       selectTypeList(thisNod)//Ajax
+   }
+}
+e.stopPropagation()
+})
+```
+
+<br>
+<br>
+
+만약 가계부의 내용을 업데이트 하고싶다면 따로 수정하기 버튼없이 등록된 keyup 이벤트로 동일하게 작성할 수 있도록 하였습니다.<br>
+이 부분은 sql부분에서 upsert 쿼리를 작성하여 기능을 구현하였습니다.<br>
+
+```
+<insert id="insertType" parameterType="itewon.seon.dto.abType.InsertTypeDto">
+    insert into abType(abSeq,userSeq,typeName)values(${abSeq},${userSeq},#{typeName})
+    on duplicate key update typeName = #{typeName};
+</insert>
+```
+
+가계부를 새로 기입하거나 삭제하는 기능은 버튼 클릭 방식으로 구현하였습니다. <br>
+ajax로 추가한 가계부 row를 db에 선반영을 하여 쓰기와 삭제가 바로바로 이루어지도록 설계하였습니다.<br>
+###  가계부 Row 추가<br>
+
  ```
- 가계부 Row 추가
+
  function addAccountBook(){
     let htmlStr ="";
     $.ajax({
@@ -269,47 +312,52 @@ Front-End 개발자 전형인가.. 싶을정도로 Back-end 기능 구현보다 
 }
  ```
 
-가계부 내역 업데이트
+### 가계부 Row 삭제<br>
 ```
-// 가계부 업데이트
-tbody.addEventListener("keyup", (e)=>{
-if(e.target !== e.currentTarget){
-   let shKey = e.target.name;
-   let shValue = e.target.value;
-   let abSeq = e.target.parentNode.parentNode.querySelector('button').value;
-   let thisNod = e.target;
-   console.log(shKey)
-   //가계부에 기입할 메모,금액
-   if(shKey =="price" || shKey =="contents"){
-       if(shKey =="price"){
-           thisNod.value = localString(shValue)
-       }
-       updateAccountBook(thisNod)//Ajax
-   
-   }else if(shKey == "type"){
-       selectTypeList(thisNod)//Ajax
-   }
+function deleteAccountBook(nod){
+    let arr = []
+    let abSeq = nod.value;
+    arr.push(abSeq);
+    console.log("endPoint :: "+ endPoint);
+    $.ajax({
+        url:'/api/accountbook/'+endPoint
+        ,data:{
+            checkList : JSON.stringify(arr)
+        }
+        ,type:'post'
+        ,success:function (rp){
+            removeRows(arr)
+        }
+    })
 }
-e.stopPropagation()
-})
+
+ 전체삭제(복구) 기능
+function deleteOrRestore(){
+    let arr =[];
+    let howManyAreThey = 0;
+    let checkList = document.querySelectorAll('input[name="abRowCheckBox"]')
+    for(let i =0 ; i < checkList.length ; i ++){
+        if(checkList[i].checked == true){
+            let abRowSeq = checkList[i].parentNode.parentNode.querySelector('input[name="abRowSeq"]');
+            arr.push(abRowSeq.value);
+            howManyAreThey ++;
+        }
+    }
+    console.log(arr);
+    $.ajax({
+        url:'/api/accountbook/'+endPoint
+        ,data:{
+            checkList : JSON.stringify(arr)
+        }
+        ,type:'post'
+        ,success:function (rp){
+           removeRows(arr);
+        }
+    })
+}
 ```
 
-<br>
-<br>
 
-만약 가계부의 내용을 업데이트 하고싶다면 따로 수정하기 버튼없이 등록된 keyup 이벤트로 동일하게 작성할 수 있도록 하였습니다.
-이 부분은 sql부분에서 upsert 쿼리를 작성하여 기능을 구현하였습니다.
-
-```
-<insert id="insertType" parameterType="itewon.seon.dto.abType.InsertTypeDto">
-    insert into abType(abSeq,userSeq,typeName)values(${abSeq},${userSeq},#{typeName})
-    on duplicate key update typeName = #{typeName};
-</insert>
-```
-
-
-
- 
 <br>
 <br>
 <br>
