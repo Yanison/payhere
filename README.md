@@ -261,8 +261,8 @@ https://user-images.githubusercontent.com/88885019/212751113-bfa6d9d7-1cb5-4f27-
         }
     }
     e.stopPropagation()
-})
-```
+    })
+    ```
    </td>
   
   <td>
@@ -285,7 +285,7 @@ https://user-images.githubusercontent.com/88885019/212751113-bfa6d9d7-1cb5-4f27-
     }
     e.stopPropagation()
   })
-   ```
+  ```
    </td>
   </tr>
 </table>
